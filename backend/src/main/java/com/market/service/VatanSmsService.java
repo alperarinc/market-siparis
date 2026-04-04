@@ -2,10 +2,12 @@ package com.market.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.http.*;
 
+import java.time.Duration;
 import java.util.*;
 
 @Service
@@ -20,13 +22,20 @@ public class VatanSmsService {
     @Value("${sms.vatan.api-key:}")
     private String apiKey;
 
-    @Value("${sms.vatan.sender:TAZE MARKET}")
+    @Value("${sms.vatan.sender:ALPER ARINC}")
     private String sender;
 
     @Value("${sms.provider:log}")
     private String smsProvider;
 
-    private final RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate;
+
+    public VatanSmsService(RestTemplateBuilder restTemplateBuilder) {
+        this.restTemplate = restTemplateBuilder
+                .connectTimeout(Duration.ofSeconds(10))
+                .readTimeout(Duration.ofSeconds(15))
+                .build();
+    }
 
     public boolean sendSms(String phone, String message) {
         if (!"vatan".equals(smsProvider)) {
