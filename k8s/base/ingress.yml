@@ -55,6 +55,13 @@ spec:
     - host: koyluoglumarket.com
       http:
         paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: market-backend
+                port:
+                  number: 8080
           - path: /
             pathType: Prefix
             backend:
