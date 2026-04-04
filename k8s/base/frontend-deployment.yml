@@ -37,7 +37,7 @@ spec:
               protocol: TCP
           env:
             - name: NEXT_PUBLIC_API_URL
-              value: "https://api.koyluoglu.com/api"
+              value: "https://api.koyluoglumarket.com/api"
             - name: BACKEND_URL
               value: "http://market-backend:8080/api"
           resources:

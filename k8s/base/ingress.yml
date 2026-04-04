@@ -19,10 +19,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - api.koyluoglu.com
+        - api.koyluoglumarket.com
       secretName: market-backend-tls
   rules:
-    - host: api.koyluoglu.com
+    - host: api.koyluoglumarket.com
       http:
         paths:
           - path: /
@@ -49,10 +49,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - koyluoglu.com
+        - koyluoglumarket.com
       secretName: market-frontend-tls
   rules:
-    - host: koyluoglu.com
+    - host: koyluoglumarket.com
       http:
         paths:
           - path: /
