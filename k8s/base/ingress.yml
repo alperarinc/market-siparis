@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: market-ingress
+  name: market-backend-ingress
   namespace: market-siparis
   labels:
     app.kubernetes.io/name: market-siparis
@@ -14,18 +14,13 @@ metadata:
     nginx.ingress.kubernetes.io/limit-burst-multiplier: "5"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      more_set_headers "X-Content-Type-Options: nosniff";
-      more_set_headers "X-Frame-Options: DENY";
-      more_set_headers "Strict-Transport-Security: max-age=31536000; includeSubDomains";
-    cert-manager.io/cluster-issuer: "letsencrypt-prod-cloudflare"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - koyluoglu.com
         - api.koyluoglu.com
-      secretName: market-tls-secret
+      secretName: market-backend-tls
   rules:
     - host: api.koyluoglu.com
       http:
@@ -37,6 +32,26 @@ spec:
                 name: market-backend
                 port:
                   number: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: market-frontend-ingress
+  namespace: market-siparis
+  labels:
+    app.kubernetes.io/name: market-siparis
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "5m"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - koyluoglu.com
+      secretName: market-frontend-tls
+  rules:
     - host: koyluoglu.com
       http:
         paths:

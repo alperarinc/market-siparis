@@ -70,6 +70,7 @@ metadata:
   labels:
     app.kubernetes.io/name: market-postgres
 spec:
+  storageClassName: local-path
   accessModes:
     - ReadWriteOnce
   resources:
