@@ -47,13 +47,13 @@ otp:
   max-attempts: 3
 
 # SMS Ayarları
-# provider: "log" (dev), "netgsm" (prod)
+# provider: "log" (dev), "vatan" (prod)
 sms:
-  provider: log
-  netgsm:
-    usercode: ${NETGSM_USERCODE:}
-    password: ${NETGSM_PASSWORD:}
-    msgheader: ${NETGSM_MSGHEADER:TAZE MARKET}
+  provider: ${SMS_PROVIDER:log}
+  vatan:
+    api-id: ${SMS_VATAN_API_ID:}
+    api-key: ${SMS_VATAN_API_KEY:}
+    sender: ${SMS_VATAN_SENDER:TAZE MARKET}
 
 # MinIO
 minio:

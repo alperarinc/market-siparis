@@ -1,11 +1,11 @@
 package com.market.service;
 
 import com.market.exception.BusinessException;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.security.SecureRandom;
 import java.time.Instant;
@@ -14,7 +14,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class OtpService {
+
+    private final VatanSmsService vatanSmsService;
 
     @Value("${otp.expiration-minutes:5}")
     private int expirationMinutes;
@@ -24,18 +27,6 @@ public class OtpService {
 
     @Value("${otp.max-attempts:3}")
     private int maxAttempts;
-
-    @Value("${sms.provider:log}")
-    private String smsProvider;
-
-    @Value("${sms.netgsm.usercode:}")
-    private String netgsmUsercode;
-
-    @Value("${sms.netgsm.password:}")
-    private String netgsmPassword;
-
-    @Value("${sms.netgsm.msgheader:}")
-    private String netgsmMsgheader;
 
     private record OtpEntry(String code, Instant expiresAt) {}
     private record AttemptEntry(int count, Instant expiresAt) {}
@@ -53,36 +44,7 @@ public class OtpService {
         otpStore.put(phone, new OtpEntry(otp, Instant.now().plusSeconds(expirationMinutes * 60L)));
 
         String message = "Doğrulama kodunuz: " + otp + " (Geçerlilik: " + expirationMinutes + " dk)";
-
-        if ("netgsm".equals(smsProvider)) {
-            sendViaNetsm(phone, message);
-        } else {
-            log.warn("=== DEV MODU: SMS gönderilmedi ===");
-            log.warn("Telefon: {} | OTP: {}", phone, otp);
-            log.warn("==================================");
-        }
-    }
-
-    private void sendViaNetsm(String phone, String message) {
-        try {
-            RestTemplate rest = new RestTemplate();
-            String url = String.format(
-                "https://api.netgsm.com.tr/sms/send/get/?usercode=%s&password=%s&gsmno=%s&message=%s&msgheader=%s",
-                netgsmUsercode, netgsmPassword, phone, message, netgsmMsgheader
-            );
-            String response = rest.getForObject(url, String.class);
-            log.info("Netgsm SMS yanıtı: {} -> {}", phone, response);
-
-            if (response != null && !response.startsWith("00") && !response.startsWith("01") && !response.startsWith("02")) {
-                log.error("Netgsm SMS gönderilemedi: {}", response);
-                throw new BusinessException("SMS gönderilemedi. Lütfen tekrar deneyin.");
-            }
-        } catch (RuntimeException e) {
-            throw e;
-        } catch (Exception e) {
-            log.error("SMS gönderim hatası", e);
-            throw BusinessException.serviceUnavailable("SMS servisi şu an kullanılamıyor.");
-        }
+        vatanSmsService.sendSms(phone, message);
     }
 
     public boolean verifyOtp(String phone, String inputOtp) {
@@ -106,7 +68,7 @@ public class OtpService {
         return false;
     }
 
-    @Scheduled(fixedRate = 300_000) // 5 dakikada bir temizlik
+    @Scheduled(fixedRate = 300_000)
     public void cleanExpiredEntries() {
         Instant now = Instant.now();
         otpStore.entrySet().removeIf(e -> e.getValue().expiresAt().isBefore(now));
