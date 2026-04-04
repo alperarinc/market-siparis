@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: market-minio
+  namespace: market-siparis
+  labels:
+    app.kubernetes.io/name: market-minio
+    app.kubernetes.io/component: storage
+spec:
+  selector:
+    app.kubernetes.io/name: market-minio
+  ports:
+    - name: api
+      port: 9000
+      targetPort: 9000
+    - name: console
+      port: 9001
+      targetPort: 9001
+  type: ClusterIP

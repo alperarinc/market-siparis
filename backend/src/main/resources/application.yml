@@ -1,0 +1,128 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: market-siparis
+
+  # PostgreSQL
+  datasource:
+    url: jdbc:postgresql://localhost:5432/market_db
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  # JPA / Hibernate
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        default_schema: public
+
+  # Flyway
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+
+  # Jackson
+  jackson:
+    time-zone: Europe/Istanbul
+
+# JWT Ayarları
+jwt:
+  secret: ${JWT_SECRET:koyluoglu-fresh-market-jwt-secret-key-2026-tokat-merkez-256bit-min}
+  access-token-expiration: 900000     # 15 dakika
+  refresh-token-expiration: 86400000  # 1 gun (7 gunden dusuruldu)
+
+# OTP Ayarları
+otp:
+  expiration-minutes: 5
+  length: 6
+  max-attempts: 3
+
+# SMS Ayarları
+# provider: "log" (dev), "netgsm" (prod)
+sms:
+  provider: log
+  netgsm:
+    usercode: ${NETGSM_USERCODE:}
+    password: ${NETGSM_PASSWORD:}
+    msgheader: ${NETGSM_MSGHEADER:TAZE MARKET}
+
+# MinIO
+minio:
+  endpoint: ${MINIO_ENDPOINT:http://localhost:9000}
+  access-key: ${MINIO_ACCESS_KEY:minioadmin}
+  secret-key: ${MINIO_SECRET_KEY:minioadmin123}
+  bucket: ${MINIO_BUCKET:market-images}
+
+# Dosya yukleme
+spring.servlet.multipart:
+  max-file-size: 5MB
+  max-request-size: 10MB
+
+# OpenAPI
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+
+# Actuator & Monitoring
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,metrics,flyway
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: when-authorized
+      probes:
+        enabled: true
+      group:
+        readiness:
+          include: db
+        liveness:
+          include: ping
+    prometheus:
+      enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
+      environment: ${SPRING_PROFILES_ACTIVE:local}
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
+      sla:
+        http.server.requests: 50ms,100ms,200ms,500ms,1s
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+
+# Rate Limiting
+rate-limit:
+  api:
+    capacity: 100
+    refill-tokens: 100
+    refill-duration: 1m
+  auth:
+    capacity: 10
+    refill-tokens: 10
+    refill-duration: 1m
+
+# Logging
+logging:
+  level:
+    com.market: DEBUG
+    org.springframework.security: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%X{traceId:-}] [%X{userId:-}] %-5level %logger{36} - %msg%n"

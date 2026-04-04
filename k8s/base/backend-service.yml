@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: market-backend
+  namespace: market-siparis
+  labels:
+    app.kubernetes.io/name: market-backend
+    app.kubernetes.io/component: backend
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 8080
+      targetPort: http
+      protocol: TCP
+  selector:
+    app.kubernetes.io/name: market-backend
+---
+# Headless service for monitoring (direct pod access)
+apiVersion: v1
+kind: Service
+metadata:
+  name: market-backend-headless
+  namespace: market-siparis
+  labels:
+    app.kubernetes.io/name: market-backend
+    app.kubernetes.io/component: monitoring
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "8080"
+    prometheus.io/path: "/actuator/prometheus"
+spec:
+  type: ClusterIP
+  clusterIP: None
+  ports:
+    - name: http
+      port: 8080
+      targetPort: http
+  selector:
+    app.kubernetes.io/name: market-backend

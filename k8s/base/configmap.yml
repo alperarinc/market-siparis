@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: market-backend-config
+  namespace: market-siparis
+  labels:
+    app.kubernetes.io/name: market-backend
+    app.kubernetes.io/component: backend
+data:
+  SPRING_PROFILES_ACTIVE: "production"
+  SERVER_PORT: "8080"
+  SPRING_DATASOURCE_URL: "jdbc:postgresql://market-postgres:5432/market_db"
+  MINIO_ENDPOINT: "http://market-minio:9000"
+  MINIO_BUCKET: "market-images"
+  MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: "health,info,prometheus,metrics"
+  MANAGEMENT_ENDPOINT_HEALTH_PROBES_ENABLED: "true"
+  JAVA_OPTS: "-XX:+UseZGC -XX:MaxRAMPercentage=75.0 -XX:+UseStringDeduplication"

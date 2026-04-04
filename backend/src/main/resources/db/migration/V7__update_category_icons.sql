@@ -1,0 +1,12 @@
+UPDATE categories SET icon = '🥬' WHERE slug = 'meyve-sebze';
+UPDATE categories SET icon = '🥛' WHERE slug = 'sut-kahvaltilik';
+UPDATE categories SET icon = '🥩' WHERE slug = 'et-tavuk-balik';
+UPDATE categories SET icon = '🌾' WHERE slug = 'temel-gida';
+UPDATE categories SET icon = '🍫' WHERE slug = 'atistirmalik';
+UPDATE categories SET icon = '🥤' WHERE slug = 'icecekler';
+UPDATE categories SET icon = '🧹' WHERE slug = 'temizlik';
+UPDATE categories SET icon = '🧴' WHERE slug = 'kisisel-bakim';
+UPDATE categories SET icon = '🧊' WHERE slug = 'dondurma-donuk';
+UPDATE categories SET icon = '🥐' WHERE slug = 'firin-pastane';
+UPDATE categories SET icon = '🍎' WHERE slug = 'meyveler';
+UPDATE categories SET icon = '🥒' WHERE slug = 'sebzeler';

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: market-siparis
+  labels:
+    app.kubernetes.io/name: market-siparis
+    app.kubernetes.io/managed-by: kubectl
