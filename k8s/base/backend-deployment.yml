@@ -29,9 +29,11 @@ spec:
         prometheus.io/path: "/actuator/prometheus"
     spec:
       terminationGracePeriodSeconds: 30
+      imagePullSecrets:
+        - name: ghcr-login-secret
       containers:
         - name: backend
-          image: registry.example.com/market-siparis/backend:latest
+          image: ghcr.io/alperarinc/market-siparis/backend:latest
           imagePullPolicy: Always
           ports:
             - name: http

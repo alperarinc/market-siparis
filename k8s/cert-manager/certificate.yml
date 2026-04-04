@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: market-tls
+  namespace: market-siparis
+spec:
+  secretName: market-tls-secret
+  issuerRef:
+    name: letsencrypt-prod-cloudflare
+    kind: ClusterIssuer
+  dnsNames:
+    - koyluoglu.com
+    - api.koyluoglu.com
+  duration: 2160h    # 90 gun
+  renewBefore: 360h  # 15 gun once yenile

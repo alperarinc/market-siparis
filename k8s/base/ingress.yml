@@ -18,37 +18,26 @@ metadata:
       more_set_headers "X-Content-Type-Options: nosniff";
       more_set_headers "X-Frame-Options: DENY";
       more_set_headers "Strict-Transport-Security: max-age=31536000; includeSubDomains";
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod-cloudflare"
 spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - koyluoglufresh.com
-        - api.koyluoglufresh.com
-        - cdn.koyluoglufresh.com
+        - koyluoglu.com
+        - api.koyluoglu.com
       secretName: market-tls-secret
   rules:
-    - host: api.koyluoglufresh.com
-      http:
-        paths:
-          - path: /api
-            pathType: Prefix
-            backend:
-              service:
-                name: market-backend
-                port:
-                  number: 8080
-    - host: cdn.koyluoglufresh.com
+    - host: api.koyluoglu.com
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: market-minio
+                name: market-backend
                 port:
-                  number: 9000
-    - host: koyluoglufresh.com
+                  number: 8080
+    - host: koyluoglu.com
       http:
         paths:
           - path: /

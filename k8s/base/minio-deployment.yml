@@ -31,12 +31,12 @@ spec:
             - name: MINIO_ROOT_USER
               valueFrom:
                 secretKeyRef:
-                  name: market-secrets
+                  name: market-backend-secret
                   key: MINIO_ACCESS_KEY
             - name: MINIO_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: market-secrets
+                  name: market-backend-secret
                   key: MINIO_SECRET_KEY
           volumeMounts:
             - name: minio-data
