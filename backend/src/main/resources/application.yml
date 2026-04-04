@@ -53,7 +53,7 @@ sms:
   vatan:
     api-id: ${SMS_VATAN_API_ID:}
     api-key: ${SMS_VATAN_API_KEY:}
-    sender: ${SMS_VATAN_SENDER:TAZE MARKET}
+    sender: ${SMS_VATAN_SENDER:ALPER ARINC}
 
 # MinIO
 minio:
