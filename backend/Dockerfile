@@ -1,34 +1,33 @@
 # ============================================
 # Stage 1: Build
 # ============================================
-FROM eclipse-temurin:25-jdk-alpine AS build
+FROM maven:3.9-eclipse-temurin-25-alpine AS build
 WORKDIR /app
 
 # Dependency cache layer
-COPY pom.xml mvnw ./
-COPY .mvn .mvn
-RUN chmod +x mvnw && ./mvnw dependency:go-offline -B
+COPY pom.xml ./
+RUN mvn dependency:go-offline -B
 
 # Source build
 COPY src src
-RUN ./mvnw clean package -DskipTests -B
+RUN mvn clean package -DskipTests -B
 
 # ============================================
 # Stage 2: Runtime (production-hardened)
 # ============================================
 FROM eclipse-temurin:25-jre-alpine
 
-# Güvenlik: non-root user
+# Guvenlik: non-root user
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
 WORKDIR /app
 
-# Sağlık kontrolü için curl
+# Saglik kontrolu icin curl
 RUN apk add --no-cache curl
 
 COPY --from=build /app/target/*.jar app.jar
 
-# Non-root olarak çalıştır
+# Non-root olarak calistir
 RUN chown -R appuser:appgroup /app
 USER appuser
 
