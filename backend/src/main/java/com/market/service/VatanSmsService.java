@@ -67,7 +67,7 @@ public class VatanSmsService {
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(payload)
                     .retrieve()
-                    .toEntity(Map.class);
+                    .toEntity(String.class);
 
             if (response.getStatusCode().is2xxSuccessful()) {
                 log.info("Vatan SMS gönderildi: {} -> {}", normalizedPhone, response.getBody());
@@ -109,7 +109,7 @@ public class VatanSmsService {
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(payload)
                     .retrieve()
-                    .toEntity(Map.class);
+                    .toEntity(String.class);
 
             log.info("Vatan SMS toplu gönderim: {} adet -> {}", phones.size(), response.getBody());
             return response.getStatusCode().is2xxSuccessful();
