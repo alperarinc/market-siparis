@@ -17,14 +17,15 @@ async function fetchApi<T>(endpoint: string, options?: RequestInit): Promise<Api
   });
 
   if (!res.ok) {
-    // 401 — session süresi dolmuş, auto-logout
-    if (res.status === 401 && !endpoint.includes('/auth/')) {
+    // 401 veya 403 — session süresi dolmuş veya yetki yok, auto-logout
+    if ((res.status === 401 || res.status === 403) && !endpoint.includes('/auth/')) {
       const { useStore } = await import('@/lib/store');
       useStore.getState().clearAuth();
       if (typeof window !== 'undefined') {
-        window.location.href = '/login';
+        const isAdminPage = window.location.pathname.startsWith('/admin');
+        window.location.href = isAdminPage ? '/admin/login' : '/login';
       }
-      throw new Error('Oturum süresi doldu. Lütfen tekrar giriş yapın.');
+      throw new Error(res.status === 403 ? 'Yetkiniz yok. Lütfen tekrar giriş yapın.' : 'Oturum süresi doldu. Lütfen tekrar giriş yapın.');
     }
 
     const error = await res.json().catch(() => ({ message: 'Bir hata oluştu' }));

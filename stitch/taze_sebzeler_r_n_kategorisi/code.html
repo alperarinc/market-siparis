@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed": "#321200",
+                    "on-surface-variant": "#564338",
+                    "error": "#ba1a1a",
+                    "surface-bright": "#f8f9ff",
+                    "surface-container": "#e7eefb",
+                    "surface-container-low": "#eef4ff",
+                    "secondary": "#226d00",
+                    "primary": "#9a4600",
+                    "inverse-on-surface": "#eaf1fe",
+                    "background": "#f8f9ff",
+                    "outline-variant": "#ddc1b2",
+                    "on-secondary-container": "#247200",
+                    "on-secondary-fixed": "#052100",
+                    "on-tertiary-fixed": "#1b1b1e",
+                    "primary-fixed-dim": "#ffb68c",
+                    "on-primary-fixed-variant": "#753400",
+                    "tertiary": "#5f5e61",
+                    "on-secondary-fixed-variant": "#185200",
+                    "primary-fixed": "#ffdbc9",
+                    "error-container": "#ffdad6",
+                    "inverse-primary": "#ffb68c",
+                    "surface-container-highest": "#dce3f0",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#d4dae7",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-surface": "#2a313b",
+                    "surface-variant": "#dce3f0",
+                    "tertiary-container": "#98979a",
+                    "on-secondary": "#ffffff",
+                    "on-background": "#151c25",
+                    "primary-container": "#e8792b",
+                    "on-tertiary-fixed-variant": "#47464a",
+                    "on-primary": "#ffffff",
+                    "surface-tint": "#9a4600",
+                    "outline": "#8a7266",
+                    "on-surface": "#151c25",
+                    "secondary-fixed-dim": "#85db61",
+                    "secondary-container": "#9ef578",
+                    "on-error-container": "#93000a",
+                    "surface-container-high": "#e2e8f5",
+                    "surface": "#f8f9ff",
+                    "tertiary-fixed": "#e4e1e5",
+                    "tertiary-fixed-dim": "#c8c6c9",
+                    "secondary-fixed": "#a0f87a",
+                    "on-tertiary-container": "#303033",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-container": "#512200"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Be Vietnam Pro"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface">
+<!-- TopNavBar -->
+<header class="sticky top-0 w-full z-50 bg-white/70 backdrop-blur-xl shadow-sm shadow-orange-900/5 transition-transform">
+<div class="flex items-center justify-between px-6 py-4 max-w-screen-2xl mx-auto">
+<div class="text-2xl font-bold tracking-tighter text-orange-800">Köylüoğlu Market</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-slate-600 hover:text-orange-600 transition-colors font-body text-sm" href="#">Fresh Produce</a>
+<a class="text-slate-600 hover:text-orange-600 transition-colors font-body text-sm" href="#">Dairy</a>
+<a class="text-slate-600 hover:text-orange-600 transition-colors font-body text-sm" href="#">Bakery</a>
+<a class="text-slate-600 hover:text-orange-600 transition-colors font-body text-sm" href="#">Organic</a>
+</nav>
+<div class="flex items-center gap-4">
+<div class="hidden lg:flex items-center bg-surface-container-low px-4 py-2 rounded-full ring-1 ring-outline-variant/15">
+<span class="material-symbols-outlined text-on-surface-variant text-lg">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48 font-body" placeholder="Search gourmet produce..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 hover:bg-slate-50/50 rounded-full transition-colors scale-95 active:scale-90">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="favorite">favorite</span>
+</button>
+<button class="p-2 hover:bg-slate-50/50 rounded-full transition-colors scale-95 active:scale-90">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="local_shipping">local_shipping</span>
+</button>
+<button class="p-2 hover:bg-slate-50/50 rounded-full transition-colors scale-95 active:scale-90 relative">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="shopping_cart">shopping_cart</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-primary rounded-full"></span>
+</button>
+<button class="p-2 hover:bg-slate-50/50 rounded-full transition-colors scale-95 active:scale-90">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="person">person</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-screen-2xl mx-auto px-6 py-8">
+<!-- Breadcrumb -->
+<nav class="flex items-center gap-2 mb-8 text-sm text-slate-500 font-medium">
+<a class="hover:text-primary transition-colors" href="#">Home</a>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Categories</a>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-on-surface">Fresh Vegetables</span>
+</nav>
+<div class="flex flex-col lg:flex-row gap-10">
+<!-- Sidebar Filters -->
+<aside class="w-full lg:w-72 flex-shrink-0">
+<div class="sticky top-28 space-y-8">
+<section>
+<h3 class="font-headline font-bold text-lg mb-4 text-on-surface">Shop Categories</h3>
+<div class="flex flex-col gap-1">
+<a class="flex items-center gap-3 bg-green-100/50 text-green-800 rounded-xl px-4 py-3 font-body text-sm font-semibold transition-all translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="Psychology_Alt">psychology_alt</span> Local Vegetables
+                            </a>
+<a class="flex items-center gap-3 text-slate-500 px-4 py-3 font-body text-sm hover:bg-slate-100 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="eco">eco</span> Seasonal Fruit
+                            </a>
+<a class="flex items-center gap-3 text-slate-500 px-4 py-3 font-body text-sm hover:bg-slate-100 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="set_meal">set_meal</span> Grass-fed Meat
+                            </a>
+<a class="flex items-center gap-3 text-slate-500 px-4 py-3 font-body text-sm hover:bg-slate-100 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="bakery_dining">bakery_dining</span> Artisan Cheese
+                            </a>
+</div>
+</section>
+<section class="p-6 rounded-3xl bg-surface-container-low">
+<h4 class="font-headline font-bold text-sm mb-6 uppercase tracking-widest text-slate-400">Refine Selection</h4>
+<!-- Filter Groups -->
+<div class="space-y-6">
+<div>
+<label class="block font-headline font-semibold text-sm mb-3">Organic Status</label>
+<div class="space-y-2">
+<label class="flex items-center gap-3 group cursor-pointer">
+<input class="rounded-md border-outline-variant text-primary focus:ring-primary/20 w-5 h-5 transition-all" type="checkbox"/>
+<span class="text-sm text-on-surface-variant group-hover:text-on-surface">Certified Organic</span>
+</label>
+<label class="flex items-center gap-3 group cursor-pointer">
+<input class="rounded-md border-outline-variant text-primary focus:ring-primary/20 w-5 h-5 transition-all" type="checkbox"/>
+<span class="text-sm text-on-surface-variant group-hover:text-on-surface">Local Harvest</span>
+</label>
+</div>
+</div>
+<div>
+<label class="block font-headline font-semibold text-sm mb-3">Price Range</label>
+<input class="w-full accent-primary h-1 bg-surface-container-highest rounded-full cursor-pointer" type="range"/>
+<div class="flex justify-between mt-2 text-xs font-medium text-slate-500">
+<span>₺0</span>
+<span>₺500+</span>
+</div>
+</div>
+<button class="w-full py-3 bg-primary-container text-on-primary-container rounded-full font-headline font-bold text-sm shadow-sm hover:brightness-110 transition-all">
+                                Apply Filters
+                            </button>
+</div>
+</section>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="flex-1">
+<header class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h1 class="font-headline font-black text-5xl md:text-6xl text-on-surface tracking-tight mb-2">Local Vegetables</h1>
+<p class="text-slate-500 max-w-xl font-body leading-relaxed">Hand-picked from regional orchards and family farms. Our commitment to sustainable sourcing brings the garden's best directly to your larder.</p>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-sm font-medium text-slate-400">Sort by:</span>
+<select class="bg-surface-container-lowest border-none ring-1 ring-outline-variant/15 rounded-full px-6 py-2 text-sm font-headline font-semibold focus:ring-primary">
+<option>Newest Harvest</option>
+<option>Price: Low to High</option>
+<option>A-Z</option>
+</select>
+</div>
+</header>
+<!-- Product Grid: Asymmetric Layout -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+<!-- Product Card 1 -->
+<div class="group relative bg-surface-container-lowest rounded-[2rem] overflow-hidden transition-all duration-300 hover:-translate-y-2">
+<div class="aspect-[4/5] relative overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="close-up of vibrant purple heirloom carrots with leafy green tops on a rustic stone background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdoId8oaDGX5ZzDbHC5oDDuJmi2exuHxqWbcfKJSr0UCtW37mnZRQWWI18U4cof0wU7ihygB9mm1pcH8TmrawB1u9ideJDt9AXmBIf31NGf4AQbSN1yODVgO-qbSbfnZvY6PHWz_Xyen5iGadxI-O-pdL6nhWztsQsG1w6Y2i033JAisJ2uu2PIZYRhr7RUw6cYv0W6KHtp7bn7abpjGzBuwF-lqDEMM_jI1yeSI8H7WVfVaW_1HRi_Igyj3Kx32UPN00HjMgp1wNe"/>
+<div class="absolute top-4 left-4">
+<span class="bg-secondary text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Organic</span>
+</div>
+</div>
+<div class="p-8">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline font-bold text-xl text-on-surface">Heirloom Rainbow Carrots</h3>
+<span class="text-primary font-headline font-black text-xl">₺48.00</span>
+</div>
+<p class="text-slate-400 text-sm font-medium mb-6">500g Bunch • Local Farm</p>
+<div class="flex items-center justify-between">
+<div class="flex items-center bg-surface-container-low rounded-full px-3 py-1">
+<button class="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-primary transition-colors">—</button>
+<span class="w-8 text-center text-sm font-bold">1</span>
+<button class="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-primary transition-colors">+</button>
+</div>
+<button class="bg-primary w-12 h-12 rounded-full flex items-center justify-center text-white shadow-lg shadow-primary/20 hover:scale-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group relative bg-surface-container-lowest rounded-[2rem] overflow-hidden transition-all duration-300 hover:-translate-y-2">
+<div class="aspect-[4/5] relative overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="fresh red vine-ripened tomatoes in a woven basket with morning sunlight casting soft shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5fgKpP3YUCV05lE_K-iNf_SYNBUPKF9WWqlEnueIDp_RCJukqaxP19hApLk_q-HJP1cygQoKlm-yoTpNEb0_mK4RW9znVtbHwzAyUPKm0hIKLfT1mbYUO3ocMwhYSByAYCvK1nl-FiKLFl9Bmg1Wfv24GHXOZdAgk1bml8cpXKA_hvL4EBpJp1mCLrnkZ5j5mweEwo8XuAf-dWcJU_oTnj7A_qHJwdWOXsBYiGEdEmYxpMQH18Sc5UPXmjMVdtLLtUL3OEzSA8ve0"/>
+<div class="absolute top-4 left-4">
+<span class="bg-primary text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Seasonal</span>
+</div>
+</div>
+<div class="p-8">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline font-bold text-xl text-on-surface">Vine-Ripened Cherry Tomatoes</h3>
+<span class="text-primary font-headline font-black text-xl">₺32.50</span>
+</div>
+<p class="text-slate-400 text-sm font-medium mb-6">250g Pack • Hydroponic</p>
+<div class="flex items-center justify-between">
+<div class="flex items-center bg-surface-container-low rounded-full px-3 py-1">
+<button class="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-primary transition-colors">—</button>
+<span class="w-8 text-center text-sm font-bold">1</span>
+<button class="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-primary transition-colors">+</button>
+</div>
+<button class="bg-primary w-12 h-12 rounded-full flex items-center justify-center text-white shadow-lg shadow-primary/20 hover:scale-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="group relative bg-surface-container-lowest rounded-[2rem] overflow-hidden transition-all duration-300 hover:-translate-y-2">
+<div class="aspect-[4/5] relative overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="vibrant fresh kale leaves with water droplets and deep green textures on a light marble surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4rwllPgFnOwPkuN2KoU7z_Nhvn12IpZgTn-4It8Fmo2i0CeAR_yAERLiRWs-jPwJ0UdkiTOFYpBwYeYsmMMH8w7LfVrAURp-IYDRY4Uny0apNiocArA-vaVWy8GMXLeX6TrfEJ0OQxRoL7C-qyCVpoMumJJUNrVk5vFFpqfHOD_AZUjAW_pZHi9pCiD-lORjChaSsembae7re3nCBe9ksM-ttRptHnQFcy1SRqdYgsMc6B9DOfeP7QcfsYiOOCpD3Bvces5sModR1"/>
+</div>
+<div class="p-8">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline font-bold text-xl text-on-surface">Organic Curly Kale</h3>
+<span class="text-primary font-headline font-black text-xl">₺24.00</span>
+</div>
+<p class="text-slate-400 text-sm font-medium mb-6">150g Bag • Fresh Cut</p>
+<div class="flex items-center justify-between">
+<div class="flex items-center bg-surface-container-low rounded-full px-3 py-1">
+<button class="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-primary transition-colors">—</button>
+<span class="w-8 text-center text-sm font-bold">1</span>
+<button class="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-primary transition-colors">+</button>
+</div>
+<button class="bg-primary w-12 h-12 rounded-full flex items-center justify-center text-white shadow-lg shadow-primary/20 hover:scale-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="group relative bg-surface-container-lowest rounded-[2rem] overflow-hidden transition-all duration-300 hover:-translate-y-2">
+<div class="aspect-[4/5] relative overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="rustic basket filled with earthy baby potatoes covered in a light layer of soil on a wooden table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmT3G70fDXYK-Phpn5bub1jPIjoAvrqJBhYpanfQqiVXxmg2OwGcTd2Ku3vMVoH_dxRncP9jVrP-DNIQN6dk9ylcoD9iAGdsjkNxGXrrWcuMccYEzkWsCSvCTspYP4wLmdVrF4SoS2SGea77lvcl2_uPjpUnGWM3jsog9Q_gBnDNaEbX4vtpWx0wtvuASRHqinPerXgXT4V4R_bc6Gs0guSQ0uxnZhmJ1p2dM05x_GuxZGjviMEwomL_qjTwhwX9vEwFvVkmmQGjVK"/>
+</div>
+<div class="p-8">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline font-bold text-xl text-on-surface">Baby New Potatoes</h3>
+<span class="text-primary font-headline font-black text-xl">₺18.90</span>
+</div>
+<p class="text-slate-400 text-sm font-medium mb-6">1kg Net • Garden Grown</p>
+<div class="flex items-center justify-between">
+<div class="flex items-center bg-surface-container-low rounded-full px-3 py-1">
+<button class="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-primary transition-colors">—</button>
+<span class="w-8 text-center text-sm font-bold">1</span>
+<button class="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-primary transition-colors">+</button>
+</div>
+<button class="bg-primary w-12 h-12 rounded-full flex items-center justify-center text-white shadow-lg shadow-primary/20 hover:scale-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 5 -->
+<div class="group relative bg-surface-container-lowest rounded-[2rem] overflow-hidden transition-all duration-300 hover:-translate-y-2">
+<div class="aspect-[4/5] relative overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="close-up of fresh green asparagus spears tied with garden twine on a clean white surface with natural side light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADBHK4aFDevBEL1mM2WndgfxbFM4r9uxlXBdZOsNz7ZA8KJsyPat9DIkPbcPFTV1PFlZE74FYy7eA1TVst1HTgSLinvPz8vq-lYRJkkfYuZm9jQszG_OW4ark00kiGYGa1XK98opX61usO6FLcDOIIs0OLEqgbyY-M0gJv9u5zybdjZ8HtCf_NWosF4rdrw5WGmXMm7xI7sCf5-UkVG-K3XTXA2BFQ2lslCdKw9jTywNx3kjPmOP401ejbc6pFKl6PcqG2Q1GAGzwz"/>
+<div class="absolute top-4 left-4">
+<span class="bg-orange-800 text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Premium</span>
+</div>
+</div>
+<div class="p-8">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline font-bold text-xl text-on-surface">Fresh Green Asparagus</h3>
+<span class="text-primary font-headline font-black text-xl">₺65.00</span>
+</div>
+<p class="text-slate-400 text-sm font-medium mb-6">200g Bundle • Imported Selection</p>
+<div class="flex items-center justify-between">
+<div class="flex items-center bg-surface-container-low rounded-full px-3 py-1">
+<button class="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-primary transition-colors">—</button>
+<span class="w-8 text-center text-sm font-bold">1</span>
+<button class="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-primary transition-colors">+</button>
+</div>
+<button class="bg-primary w-12 h-12 rounded-full flex items-center justify-center text-white shadow-lg shadow-primary/20 hover:scale-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Feature Bento Card (Marketing) -->
+<div class="group relative bg-primary-container rounded-[2rem] overflow-hidden p-8 flex flex-col justify-end min-h-[400px]">
+<div class="absolute inset-0 opacity-20">
+<img class="w-full h-full object-cover" data-alt="panoramic shot of a lush green agricultural field under a clear blue morning sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuFeCRgdGF4pIKae-ukO_UNXzAq6xbHocm8XV1pW3TMh_W-qZ4w3oI1dv9LF8AchxQmiYBCBplFXLSS3reE6R8daFrKMtG_sDqTN12bMzV281BIqK0rAaxrzfwiRD3-cbgprYNdvZefH3coDOc55Z5Stzxug9IRvpE_iv8NdXqoHVTTQIQCuKzh4IFj_8SGC9n9-uHDR2ZE-u928elpqGI7au0Ajr3iQ61IMkO0IpPrrorHFTCiz8SZ-YjeTUyENJ-oZlCZxW4diOx"/>
+</div>
+<div class="relative z-10">
+<span class="inline-block px-4 py-1 rounded-full bg-on-primary-fixed text-primary-fixed text-[10px] font-black uppercase tracking-widest mb-4">Gourmet Sourcing</span>
+<h2 class="font-headline font-black text-3xl text-on-primary-fixed leading-tight mb-4">Farm-to-Door, <br/>Within 12 Hours</h2>
+<p class="text-on-primary-fixed/80 text-sm font-medium mb-8">We partner with over 40 local cultivators to ensure your vegetables arrive with morning dew still on their leaves.</p>
+<a class="inline-flex items-center gap-2 font-headline font-bold text-on-primary-fixed hover:gap-4 transition-all" href="#">
+                                Learn about our farmers <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<footer class="mt-20 flex items-center justify-center gap-2">
+<button class="w-12 h-12 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant hover:bg-primary-container hover:text-on-primary-container transition-all">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-12 h-12 rounded-full bg-primary text-white font-headline font-bold shadow-md shadow-primary/20">1</button>
+<button class="w-12 h-12 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant hover:bg-primary-container transition-all font-headline font-bold">2</button>
+<button class="w-12 h-12 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant hover:bg-primary-container transition-all font-headline font-bold">3</button>
+<button class="w-12 h-12 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant hover:bg-primary-container hover:text-on-primary-container transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</footer>
+</div>
+</div>
+</main>
+<!-- Footer Component -->
+<footer class="w-full border-t border-slate-200 dark:border-slate-800 bg-slate-50 mt-24">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 px-12 py-16 max-w-screen-2xl mx-auto">
+<div class="space-y-6">
+<div class="font-be-vietnam-pro font-black text-xl text-orange-800 uppercase tracking-tighter">Köylüoğlu Market</div>
+<p class="text-slate-500 text-sm leading-relaxed">Defining the digital grocery experience through curated gourmet sourcing and sustainable local partnerships.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">public</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">mail</span>
+</a>
+</div>
+</div>
+<div>
+<h4 class="font-headline font-bold text-on-surface mb-6">Shop</h4>
+<ul class="space-y-4 text-sm font-body">
+<li><a class="text-slate-400 hover:text-orange-500 transition-opacity" href="#">Fresh Produce</a></li>
+<li><a class="text-slate-400 hover:text-orange-500 transition-opacity" href="#">Dairy &amp; Eggs</a></li>
+<li><a class="text-slate-400 hover:text-orange-500 transition-opacity" href="#">Organic Selection</a></li>
+<li><a class="text-slate-400 hover:text-orange-500 transition-opacity" href="#">Artisan Bakery</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline font-bold text-on-surface mb-6">Support</h4>
+<ul class="space-y-4 text-sm font-body">
+<li><a class="text-slate-400 hover:text-orange-500 transition-opacity" href="#">Delivery Info</a></li>
+<li><a class="text-slate-400 hover:text-orange-500 transition-opacity" href="#">Returns Policy</a></li>
+<li><a class="text-slate-400 hover:text-orange-500 transition-opacity" href="#">Sustainability</a></li>
+<li><a class="text-slate-400 hover:text-orange-500 transition-opacity" href="#">Contact Us</a></li>
+</ul>
+</div>
+<div class="p-8 rounded-[2rem] bg-surface-container flex flex-col items-center justify-center text-center">
+<h4 class="font-headline font-black text-lg mb-2">Join the Larder</h4>
+<p class="text-slate-500 text-xs mb-6">Get weekly harvest alerts and recipes.</p>
+<div class="w-full relative">
+<input class="w-full bg-white border-none rounded-full px-6 py-3 text-sm focus:ring-2 focus:ring-primary/20 placeholder:text-slate-300" placeholder="Your email" type="email"/>
+<button class="absolute right-1 top-1 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<div class="px-12 py-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4">
+<span class="font-inter text-xs text-slate-500">© 2024 Köylüoğlu Market. Sustainable Gourmet Sourcing.</span>
+<div class="flex gap-8">
+<a class="text-xs text-slate-400 hover:text-orange-500" href="#">Privacy Policy</a>
+<a class="text-xs text-slate-400 hover:text-orange-500" href="#">Terms of Service</a>
+</div>
+</div>
+</footer>
+</body></html>

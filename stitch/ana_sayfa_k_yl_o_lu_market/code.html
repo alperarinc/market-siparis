@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800;900&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#321200",
+                        "on-surface-variant": "#564338",
+                        "error": "#ba1a1a",
+                        "surface-bright": "#f8f9ff",
+                        "surface-container": "#e7eefb",
+                        "surface-container-low": "#eef4ff",
+                        "secondary": "#226d00",
+                        "primary": "#9a4600",
+                        "inverse-on-surface": "#eaf1fe",
+                        "background": "#f8f9ff",
+                        "outline-variant": "#ddc1b2",
+                        "on-secondary-container": "#247200",
+                        "on-secondary-fixed": "#052100",
+                        "on-tertiary-fixed": "#1b1b1e",
+                        "primary-fixed-dim": "#ffb68c",
+                        "on-primary-fixed-variant": "#753400",
+                        "tertiary": "#5f5e61",
+                        "on-secondary-fixed-variant": "#185200",
+                        "primary-fixed": "#ffdbc9",
+                        "error-container": "#ffdad6",
+                        "inverse-primary": "#ffb68c",
+                        "surface-container-highest": "#dce3f0",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#d4dae7",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-surface": "#2a313b",
+                        "surface-variant": "#dce3f0",
+                        "tertiary-container": "#98979a",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#151c25",
+                        "primary-container": "#e8792b",
+                        "on-tertiary-fixed-variant": "#47464a",
+                        "on-primary": "#ffffff",
+                        "surface-tint": "#9a4600",
+                        "outline": "#8a7266",
+                        "on-surface": "#151c25",
+                        "secondary-fixed-dim": "#85db61",
+                        "secondary-container": "#9ef578",
+                        "on-error-container": "#93000a",
+                        "surface-container-high": "#e2e8f5",
+                        "surface": "#f8f9ff",
+                        "tertiary-fixed": "#e4e1e5",
+                        "tertiary-fixed-dim": "#c8c6c9",
+                        "secondary-fixed": "#a0f87a",
+                        "on-tertiary-container": "#303033",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#512200"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Be Vietnam Pro"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .headline-lg { font-size: 2rem; line-height: 2.5rem; }
+        .display-lg { font-size: 3.5rem; line-height: 4rem; }
+        .label-md { font-size: 0.875rem; font-weight: 500; letter-spacing: 0.05em; }
+        .body-sm { font-size: 0.875rem; line-height: 1.25rem; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container/30">
+<!-- Top Navigation Bar -->
+<nav class="sticky top-0 w-full z-50 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl shadow-sm shadow-orange-900/5">
+<div class="flex items-center justify-between px-6 py-4 max-w-screen-2xl mx-auto">
+<div class="text-2xl font-bold tracking-tighter text-orange-800 dark:text-orange-400 font-headline">Köylüoğlu Market</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-orange-700 dark:text-orange-400 font-semibold border-b-2 border-orange-600 transition-colors" href="#">Fresh Produce</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-orange-600 transition-colors" href="#">Dairy</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-orange-600 transition-colors" href="#">Bakery</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-orange-600 transition-colors" href="#">Organic</a>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden lg:flex items-center gap-2 bg-surface-container-low px-4 py-2 rounded-full border border-outline-variant/15">
+<span class="material-symbols-outlined text-on-surface-variant">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48" placeholder="Search gourmet pantry..." type="text"/>
+</div>
+<button class="p-2 hover:bg-slate-50/50 rounded-full transition-transform active:scale-90">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="favorite">favorite</span>
+</button>
+<button class="p-2 hover:bg-slate-50/50 rounded-full transition-transform active:scale-90">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="local_shipping">local_shipping</span>
+</button>
+<button class="p-2 hover:bg-slate-50/50 rounded-full transition-transform active:scale-90">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="shopping_cart">shopping_cart</span>
+</button>
+<button class="p-2 hover:bg-slate-50/50 rounded-full transition-transform active:scale-90">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="person">person</span>
+</button>
+</div>
+</div>
+</nav>
+<main>
+<!-- Hero Section -->
+<section class="relative min-h-[819px] flex items-center overflow-hidden bg-surface-container">
+<div class="max-w-screen-2xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center w-full relative z-10">
+<div class="space-y-8">
+<span class="inline-block px-4 py-1.5 rounded-full bg-secondary-container text-on-secondary-container label-md uppercase">Seasonal Harvest Now In</span>
+<h1 class="font-headline display-lg font-black tracking-tight text-on-primary-fixed leading-[1.1]">
+                        From Local Fields <br/>
+<span class="text-primary-container">To Your Larder.</span>
+</h1>
+<p class="text-on-surface-variant text-lg max-w-lg leading-relaxed">
+                        Experience the peak of Mediterranean gourmet sourcing. Hand-picked, organic produce delivered within 24 hours of harvest.
+                    </p>
+<div class="flex flex-wrap gap-4 pt-4">
+<button class="px-10 py-4 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-full font-semibold shadow-lg shadow-primary/20 hover:scale-105 transition-transform">
+                            Shop Now
+                        </button>
+<button class="px-10 py-4 bg-surface-container-highest text-on-surface rounded-full font-semibold hover:bg-surface-container-high transition-colors">
+                            Explore Categories
+                        </button>
+</div>
+</div>
+<div class="relative hidden md:block">
+<div class="aspect-square rounded-[3rem] overflow-hidden shadow-2xl shadow-on-surface/10 rotate-3">
+<img class="w-full h-full object-cover" data-alt="Abundant close-up of fresh organic vegetables including vibrant tomatoes, leafy greens, and purple carrots on a rustic wooden table with morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvBt9aRf7LR8GsaDg4KVSvgyowsVb8Ocsfvz__xKGtNd7mezOMcVUbdG2gkmFh4QurD59irqHj7jxFd9kQEnisHeNsZiJy3x0iPVxFAZt-5nnEq_yO_iXo336watN2ecl5AV46Oc3JxTSO9-9FHL6RlFF6oucPgriOmemPTnR6xySA39AH3sFiRdiS1sbAVnicA1KhCrIprwcUCtWZwUe4P31zaAI1gHmKn6yclzmpSFG9TtPcDPLWW_SMkEZqrLqnWErWIQZGISQC"/>
+</div>
+<div class="absolute -bottom-10 -left-10 bg-surface-container-lowest p-6 rounded-3xl shadow-xl flex items-center gap-4 max-w-xs -rotate-2">
+<div class="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">100% Pesticide Free</p>
+<p class="text-sm text-on-surface-variant">Certified Organic Farmers</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Background Decorative Element -->
+<div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-primary/5 to-transparent"></div>
+</section>
+<!-- Category Grid / Bento Section -->
+<section class="py-24 px-6 max-w-screen-2xl mx-auto">
+<div class="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h2 class="font-headline headline-lg font-bold text-on-surface mb-2">Shop Categories</h2>
+<p class="text-on-surface-variant">Curated selections from the finest local producers</p>
+</div>
+<button class="text-primary font-semibold flex items-center gap-2 group">
+                    View All Categories <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<!-- Bento Card 1: Seasonal -->
+<div class="md:col-span-2 md:row-span-2 group relative overflow-hidden rounded-3xl bg-slate-900 aspect-square md:aspect-auto">
+<img class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-700" data-alt="Vibrant seasonal citrus fruits including oranges and lemons with water droplets and fresh green leaves on a soft pastel background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5kfgxRADPB1_f5AoKxFOSRoeZKW-c2Ii6gmCxbdcyHZK6po8tNEgvXF9TF26ssW4xUeEokMU3FG_rebCCbKoyKYJPVedaKxsnSFZei7PLKOplkUHqQnox0SrJiabe7iSa_jdfk2VuOLxvVCGYXaBuhyqUerwC02NYpaOJmmf24GYqbqGtD5A6G08L30XNsF0INTfg-Jovp-NFXYQeWiFRswQFw-qyc9oji9_BSiWOGaJqjXXoGCuIg9AVZWaENbvgkTnAanlNi0Xq"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-10 flex flex-col justify-end">
+<span class="label-md text-secondary-fixed mb-2">LIMITED TIME</span>
+<h3 class="text-3xl font-headline font-bold text-white mb-4">Seasonal Specialties</h3>
+<p class="text-white/80 max-w-sm mb-6">Discover the soul of the season with our hand-selected spring harvest collection.</p>
+<button class="w-fit px-6 py-2 bg-white text-black rounded-full font-semibold active:scale-95 transition-transform">Shop Collection</button>
+</div>
+</div>
+<!-- Bento Card 2: Dairy -->
+<div class="group relative overflow-hidden rounded-3xl bg-surface-container-low aspect-square">
+<img class="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-500" data-alt="Artisanal glass milk bottle and rustic cheeses on a marble countertop with soft natural morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAO8u-oKL--pUJ94cEEcK69AzH1srwl5nunJxeOI1TylKp2H-wG64x0TW0k6TmrvIAP1ij2SCOvkLTfD7D4szUztkYLL3joT44HqXdqkwRQL9med6RTAf_6vM9WdglZ7fR-5wxHquKiU_2gFHecASilaDQYLzzSZGT032kqlPFeufwg3a4X8pSL98UFt6enAtSVxZlkImeo5SMf76vUdoDlBUacWHvRYmgob6bvuiFVFcAPF_OUBQvDHGks_-JnJDvQ7DVFrTw3KelA"/>
+<div class="absolute inset-0 bg-black/20 p-6 flex flex-col justify-end">
+<h3 class="text-xl font-headline font-bold text-white">Artisan Dairy</h3>
+</div>
+</div>
+<!-- Bento Card 3: Bakery -->
+<div class="group relative overflow-hidden rounded-3xl bg-surface-container-low aspect-square">
+<img class="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-500" data-alt="Freshly baked sourdough bread with golden crust dusted with flour on a dark linen surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYjHXT_crmv6i_hdliG1u29QO3AE9Vzrh_cV2ZgSbNTsfv1pv3vl6LFD8QtHDmy89SKWgVwMqnfgiVurcnnhqTirClKwV24Ic3NbzbXWBvauVtcGUIoSI5OE5mKMAEUyZulyUOjDQmwFZNB7Bl5Obe6OUR8J6FdCHL-L1CTa_hzh1OmbP8Fq-yCLtQOn8C2lVI8-jrBn1C4IdOiz99mujyGfT6IDERZSUftCsbuGf2nArdIDsX5fp0HkvGQLLQ91bBTr8muI3I_mAT"/>
+<div class="absolute inset-0 bg-black/20 p-6 flex flex-col justify-end">
+<h3 class="text-xl font-headline font-bold text-white">Morning Bakery</h3>
+</div>
+</div>
+<!-- Bento Card 4: Meat & Fish -->
+<div class="md:col-span-2 group relative overflow-hidden rounded-3xl bg-surface-container-low h-64">
+<img class="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-500" data-alt="Premium cut of fresh beef ribeye with rosemary sprigs and sea salt on a dark slate background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4K90VjVuIw2U7gVyaRONZ-F2M0VVPA1oMu1XiW5U8Cyz96XvbRm_V8UtF0_oWfanySal6lsQR_dm-8e-sD-KqpqfK2yAFxRSY899Eq2XxxZKkMCOV3H4d158wTJpygrnEx7yWH8a2evhpOHY4Fg-AYzyBi6pVcNjqdQ1JIC4QkdJtbvbOthk0U5M90i6y4q2Kdv9rq0ZEKI7bJnTYQxiWvc5H2-iMp0HbRRUQ3rc6syq_IAZ7yuQ5Dvr736TFF3eu7Y1wRhnHQXS8"/>
+<div class="absolute inset-0 bg-black/30 p-8 flex flex-col justify-end">
+<h3 class="text-2xl font-headline font-bold text-white">Grass-fed Meats</h3>
+<p class="text-white/80">Premium cuts from sustainable local pastures.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Delivery Benefits Section -->
+<section class="bg-surface-container-low py-20 overflow-hidden">
+<div class="max-w-screen-2xl mx-auto px-6 grid md:grid-cols-3 gap-12">
+<div class="flex flex-col items-center text-center space-y-4">
+<div class="w-16 h-16 rounded-full bg-primary-container/10 flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-3xl" data-icon="local_shipping">local_shipping</span>
+</div>
+<h4 class="text-xl font-bold font-headline">Same Day Delivery</h4>
+<p class="text-on-surface-variant body-sm">Order by 10 AM and receive your gourmet pantry items by dinner time, guaranteed.</p>
+</div>
+<div class="flex flex-col items-center text-center space-y-4">
+<div class="w-16 h-16 rounded-full bg-secondary-container/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-3xl" data-icon="verified">verified</span>
+</div>
+<h4 class="text-xl font-bold font-headline">Quality Guaranteed</h4>
+<p class="text-on-surface-variant body-sm">Not happy with your produce? We offer no-questions-asked replacements or full refunds.</p>
+</div>
+<div class="flex flex-col items-center text-center space-y-4">
+<div class="w-16 h-16 rounded-full bg-on-tertiary-fixed-variant/10 flex items-center justify-center text-on-tertiary-fixed-variant">
+<span class="material-symbols-outlined text-3xl" data-icon="inventory_2">inventory_2</span>
+</div>
+<h4 class="text-xl font-bold font-headline">Sustainable Packaging</h4>
+<p class="text-on-surface-variant body-sm">Plastic-free, biodegradable, and reusable packaging for every single order.</p>
+</div>
+</div>
+</section>
+<!-- Product Carousel Section -->
+<section class="py-24 px-6 max-w-screen-2xl mx-auto overflow-hidden">
+<div class="flex items-center justify-between mb-12">
+<h2 class="font-headline headline-lg font-bold text-on-surface">Local Favorites</h2>
+<div class="flex gap-2">
+<button class="p-3 border border-outline-variant/30 rounded-full hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="p-3 border border-outline-variant/30 rounded-full hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Product Card 1 -->
+<div class="group relative bg-surface-container-lowest rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+<div class="h-64 relative overflow-hidden bg-slate-50">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Freshly harvested bright green organic peppers with water droplets on a neutral studio background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEs0e7ChC3Bx-7nvaAZ7m8xvjBCd516xS162Znnd29hFoS7YknF8d6QeLEpV9ToegZDJPJTlsZR7KWQRBMXbvFKuPtR3qUSH51ppXbpHJlpOCnGYP-j8qpctNdp_3Wyr5x0mw6geN87EuMTIfLI7Ck-EJkBTV6bZl0ZAPnKody8Y1sEYKNkeotosD20tr7_Qgpf-CzSxt428vFQUYD1hUfOSkMdTRn-mKw4c0A7Gk4gYnNeiisCQVsszCSoZRou9ZS2c89ZiGwmZfG"/>
+<button class="absolute top-4 right-4 p-2 bg-white/80 backdrop-blur rounded-full text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">favorite</span>
+</button>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<div>
+<span class="label-md text-secondary uppercase text-[10px] tracking-widest">VEGETABLES</span>
+<h3 class="font-headline font-bold text-lg">Heirloom Bell Peppers</h3>
+</div>
+<span class="font-headline font-bold text-primary">$4.50</span>
+</div>
+<p class="text-on-surface-variant body-sm mb-6 line-clamp-2">Crisp, sweet, and locally grown in the sun-drenched gardens of Köylüoğlu.</p>
+<button class="w-full py-3 bg-surface-container-low text-on-surface font-semibold rounded-xl group-hover:bg-primary group-hover:text-white transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add_shopping_cart</span> Add to Cart
+                        </button>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group relative bg-surface-container-lowest rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+<div class="h-64 relative overflow-hidden bg-slate-50">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Organic glass jars of homemade Greek yogurt topped with honey and fresh walnuts on a wooden board" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiu4TFT_fdZVldka5uzToTt9bI2-JcSrMcG5VR1u7AgRW9gqUoWpxChVZz4I9j0kMCAvNX6Yg1xW8nzwry4ygYWvuw4mZjgvrW45dqMoDH8zvbCkHqr6RcgX3NnWRbFKYbx9SeH5-NYi1j2_hi6vBPc5z7RJNfC0KioEO7qNBfd4vrZchYriDDmnDHQnVJCaU459UNcMVQYcfWIEc8l98G9N_1mLCJogrixLPLF6oMiZzESXZ4dpnTF1dyvgIjviM3d7jzZrzd7Avw"/>
+<button class="absolute top-4 right-4 p-2 bg-white/80 backdrop-blur rounded-full text-on-surface-variant">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<div>
+<span class="label-md text-secondary uppercase text-[10px] tracking-widest">DAIRY</span>
+<h3 class="font-headline font-bold text-lg">Traditional Strained Yogurt</h3>
+</div>
+<span class="font-headline font-bold text-primary">$6.20</span>
+</div>
+<p class="text-on-surface-variant body-sm mb-6 line-clamp-2">Extra creamy, grass-fed goat milk yogurt made using century-old techniques.</p>
+<button class="w-full py-3 bg-surface-container-low text-on-surface font-semibold rounded-xl group-hover:bg-primary group-hover:text-white transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add_shopping_cart</span> Add to Cart
+                        </button>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="group relative bg-surface-container-lowest rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+<div class="h-64 relative overflow-hidden bg-slate-50">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Woven basket overflowing with various types of garden-fresh mushrooms including shiitake and oyster" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD46nY7zfRTZ1sFn8BfMwtvi9hBo7Q0Kfb4fA4wqwQvyL6a8bWC7KZ-i1s_lGjMrILOjuZtF44TQfR8XCV4YPodIC1a5v682POde8nkHG0RgGumhlgdFGygQSd-2th7Uik-lHz2-hSBrC_f4_aNBOYHCrlizjl_emYg5qA6Y3iRLK_K8-e0LR6m1Gk7EjLKtEL7k5yYr731n2qyUpaAnqNEeRm100OZXdKIiZFCbl9o1Hj8RXO_0qXLlGsKWKAVWXxuA3DkCr7EZTn9"/>
+<button class="absolute top-4 right-4 p-2 bg-white/80 backdrop-blur rounded-full text-on-surface-variant">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<div>
+<span class="label-md text-secondary uppercase text-[10px] tracking-widest">ORGANIC</span>
+<h3 class="font-headline font-bold text-lg">Wild Forest Mushrooms</h3>
+</div>
+<span class="font-headline font-bold text-primary">$12.00</span>
+</div>
+<p class="text-on-surface-variant body-sm mb-6 line-clamp-2">Sustainably foraged diverse mix of exotic forest mushrooms for gourmet cooking.</p>
+<button class="w-full py-3 bg-surface-container-low text-on-surface font-semibold rounded-xl group-hover:bg-primary group-hover:text-white transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add_shopping_cart</span> Add to Cart
+                        </button>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="group relative bg-surface-container-lowest rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+<div class="h-64 relative overflow-hidden bg-slate-50">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Handcrafted aged hard cheese wedge on a wooden cutting board with honeycomb and grapes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6jb-ewZHVtzoWxscHy8HVTWfm36VCChDRoOhOSF0VC5APMG2K2CEwCFuE46CPQZQKFGxhbyLAvfzfO0uTXhLHopVfLF8XhoXlGhVrE60NuCobiKn1QA3a-VZtdHRkDfWQovve1XQHmwjOu0Be_b-DfVxEQ5eINZpFzOEBLJCEx-cboA5TDLJFoeYmzdsEVhLTizQqWQ1zpfal0TsXudzhA-xUZpY9AA7swKApaKvfmXMb57NsKwbLQT1A97OQ05-M3-4gdWbutNgW"/>
+<button class="absolute top-4 right-4 p-2 bg-white/80 backdrop-blur rounded-full text-on-surface-variant">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<div>
+<span class="label-md text-secondary uppercase text-[10px] tracking-widest">ARTISAN</span>
+<h3 class="font-headline font-bold text-lg">Aged Cave Cheese</h3>
+</div>
+<span class="font-headline font-bold text-primary">$18.90</span>
+</div>
+<p class="text-on-surface-variant body-sm mb-6 line-clamp-2">12-month aged reserve cheese with a sharp, complex profile and nutty finish.</p>
+<button class="w-full py-3 bg-surface-container-low text-on-surface font-semibold rounded-xl group-hover:bg-primary group-hover:text-white transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add_shopping_cart</span> Add to Cart
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Side Navigation (Mobile Hidden, can be triggered as a drawer if needed) -->
+<!-- Note: This is part of the Shared Components blueprint -->
+</main>
+<!-- Footer -->
+<footer class="bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 mt-20">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 px-12 py-16 max-w-screen-2xl mx-auto">
+<div class="space-y-6">
+<div class="font-headline font-black text-xl text-orange-800">Köylüoğlu Market</div>
+<p class="text-slate-500 body-sm max-w-xs leading-relaxed">
+                    Bringing the world's most authentic gourmet flavors directly from the farm to your doorstep with zero compromise.
+                </p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center hover:bg-primary hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-sm">public</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center hover:bg-primary hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-sm">share</span>
+</a>
+</div>
+</div>
+<div class="space-y-6">
+<h5 class="font-bold text-slate-900">Information</h5>
+<ul class="space-y-3">
+<li><a class="text-slate-400 hover:text-orange-500 underline decoration-orange-500/30 underline-offset-4 transition-all body-sm" href="#">About Us</a></li>
+<li><a class="text-slate-400 hover:text-orange-500 underline decoration-orange-500/30 underline-offset-4 transition-all body-sm" href="#">Delivery Info</a></li>
+<li><a class="text-slate-400 hover:text-orange-500 underline decoration-orange-500/30 underline-offset-4 transition-all body-sm" href="#">Sustainability</a></li>
+</ul>
+</div>
+<div class="space-y-6">
+<h5 class="font-bold text-slate-900">Customer Care</h5>
+<ul class="space-y-3">
+<li><a class="text-slate-400 hover:text-orange-500 underline decoration-orange-500/30 underline-offset-4 transition-all body-sm" href="#">Returns</a></li>
+<li><a class="text-slate-400 hover:text-orange-500 underline decoration-orange-500/30 underline-offset-4 transition-all body-sm" href="#">Privacy Policy</a></li>
+<li><a class="text-slate-400 hover:text-orange-500 underline decoration-orange-500/30 underline-offset-4 transition-all body-sm" href="#">Contact Us</a></li>
+</ul>
+</div>
+<div class="space-y-6">
+<h5 class="font-bold text-slate-900">Newsletter</h5>
+<p class="text-slate-500 body-sm">Get recipes and seasonal news.</p>
+<div class="flex flex-col gap-2">
+<input class="px-4 py-3 bg-white border border-slate-200 rounded-xl focus:ring-primary focus:border-primary text-sm" placeholder="Your email address" type="email"/>
+<button class="px-4 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primary-container transition-colors">Join</button>
+</div>
+</div>
+</div>
+<div class="px-12 py-8 border-t border-slate-200/50 max-w-screen-2xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-slate-500 body-sm">© 2024 Köylüoğlu Market. Sustainable Gourmet Sourcing.</p>
+<div class="flex gap-6">
+<span class="material-symbols-outlined text-slate-300">credit_card</span>
+<span class="material-symbols-outlined text-slate-300">account_balance_wallet</span>
+<span class="material-symbols-outlined text-slate-300">contactless</span>
+</div>
+</div>
+</footer>
+</body></html>

@@ -2,9 +2,8 @@ package com.market.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.client.RestClient;
 import org.springframework.http.*;
 
 import java.time.Duration;
@@ -28,12 +27,11 @@ public class VatanSmsService {
     @Value("${sms.provider:log}")
     private String smsProvider;
 
-    private final RestTemplate restTemplate;
+    private final RestClient restClient;
 
-    public VatanSmsService(RestTemplateBuilder restTemplateBuilder) {
-        this.restTemplate = restTemplateBuilder
-                .connectTimeout(Duration.ofSeconds(10))
-                .readTimeout(Duration.ofSeconds(15))
+    public VatanSmsService() {
+        this.restClient = RestClient.builder()
+                .baseUrl(VATAN_SMS_URL)
                 .build();
     }
 
@@ -59,11 +57,11 @@ public class VatanSmsService {
                     "message", message
             )));
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-
-            HttpEntity<Map<String, Object>> request = new HttpEntity<>(payload, headers);
-            ResponseEntity<Map> response = restTemplate.postForEntity(VATAN_SMS_URL, request, Map.class);
+            var response = restClient.post()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(payload)
+                    .retrieve()
+                    .toEntity(Map.class);
 
             if (response.getStatusCode().is2xxSuccessful()) {
                 log.info("Vatan SMS gönderildi: {} -> {}", normalizedPhone, response.getBody());
@@ -101,11 +99,11 @@ public class VatanSmsService {
             payload.put("message_content_type", "bilgi");
             payload.put("phones", phones);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-
-            HttpEntity<Map<String, Object>> request = new HttpEntity<>(payload, headers);
-            ResponseEntity<Map> response = restTemplate.postForEntity(VATAN_SMS_URL, request, Map.class);
+            var response = restClient.post()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(payload)
+                    .retrieve()
+                    .toEntity(Map.class);
 
             log.info("Vatan SMS toplu gönderim: {} adet -> {}", phones.size(), response.getBody());
             return response.getStatusCode().is2xxSuccessful();

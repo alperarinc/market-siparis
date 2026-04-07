@@ -41,10 +41,15 @@ public class OtpService {
         }
 
         String otp = generateOtp();
-        otpStore.put(phone, new OtpEntry(otp, Instant.now().plusSeconds(expirationMinutes * 60L)));
 
         String message = "Doğrulama kodunuz: " + otp + " (Geçerlilik: " + expirationMinutes + " dk)";
-        vatanSmsService.sendSms(phone, message);
+        boolean sent = vatanSmsService.sendSms(phone, message);
+        if (!sent) {
+            log.error("SMS gönderilemedi: telefon={}", phone);
+            throw new BusinessException("SMS gönderilemedi. Lütfen tekrar deneyin.", org.springframework.http.HttpStatus.SERVICE_UNAVAILABLE);
+        }
+
+        otpStore.put(phone, new OtpEntry(otp, Instant.now().plusSeconds(expirationMinutes * 60L)));
     }
 
     public boolean verifyOtp(String phone, String inputOtp) {

@@ -3,7 +3,7 @@
 import { useStore } from '@/lib/store';
 import { formatPrice } from '@/lib/format';
 import Link from 'next/link';
-import { FiMinus, FiPlus, FiTrash2, FiShoppingBag } from 'react-icons/fi';
+import Icon from '@/components/Icon';
 
 export default function CartPage() {
   const { cartItems, updateQuantity, removeFromCart, getCartTotal, isAuthenticated } = useStore();
@@ -12,17 +12,16 @@ export default function CartPage() {
   const deliveryFee = total >= 200 ? 0 : 29.9;
   const grandTotal = total + deliveryFee;
   const freeDeliveryRemaining = 200 - total;
-  const freeDeliveryProgress = Math.min((total / 200) * 100, 100);
 
   if (cartItems.length === 0) {
     return (
       <div className="text-center py-20">
-        <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <FiShoppingBag className="text-gray-400" size={32} />
+        <div className="w-20 h-20 bg-surface-container-low rounded-full flex items-center justify-center mx-auto mb-4">
+          <Icon name="shopping_bag" className="text-slate-400 text-3xl" />
         </div>
-        <h2 className="text-xl font-bold text-gray-700 mb-2">Sepetiniz Boş</h2>
-        <p className="text-gray-500 mb-6">Hadi alışverişe başlayalım!</p>
-        <Link href="/products" className="inline-block bg-brand-orange-500 text-white px-6 py-3 rounded-lg font-bold hover:bg-brand-orange-600 transition">
+        <h2 className="text-2xl font-headline font-bold text-on-surface mb-2">Sepetiniz Bos</h2>
+        <p className="text-slate-500 mb-6">Hadi alisverise baslayalim!</p>
+        <Link href="/products" className="btn-primary inline-block">
           Ürünlere Göz At
         </Link>
       </div>
@@ -30,105 +29,131 @@ export default function CartPage() {
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      {/* Sepet Ürünleri */}
-      <div className="lg:col-span-2 space-y-3">
-        <h1 className="text-xl font-bold mb-2">Sepetim ({cartItems.length} ürün)</h1>
-
-        {freeDeliveryRemaining > 0 && (
-          <div className="bg-brand-orange-50 rounded-lg p-4 mb-2">
-            <div className="flex items-center justify-between text-sm mb-2">
-              <span className="text-brand-orange-700 font-medium">
-                Ücretsiz teslimat için <strong>{formatPrice(freeDeliveryRemaining)} TL</strong> daha ekleyin
-              </span>
-              <span className="text-brand-orange-500 font-bold text-xs">{freeDeliveryProgress.toFixed(0)}%</span>
-            </div>
-            <div className="w-full bg-brand-orange-100 rounded-full h-2">
-              <div className="bg-brand-orange-500 h-2 rounded-full transition-all duration-500" style={{ width: `${freeDeliveryProgress}%` }} />
-            </div>
-          </div>
-        )}
-        {freeDeliveryRemaining <= 0 && (
-          <div className="bg-green-50 rounded-lg p-3 text-green-700 font-medium text-sm">
-            Tebrikler! Ücretsiz teslimat hakkı kazandınız.
-          </div>
-        )}
-
-        {cartItems.map((item) => (
-          <div key={item.productId} className="bg-white rounded-lg p-4 flex items-center gap-4 border border-gray-100">
-            <div className="w-14 h-14 bg-gray-50 rounded-lg flex items-center justify-center text-xl shrink-0 overflow-hidden">
-              {item.imageUrl ? (
-                <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover" />
-              ) : (
-                <FiShoppingBag className="text-gray-300" size={20} />
-              )}
-            </div>
-            <div className="flex-1 min-w-0">
-              <h3 className="font-semibold text-gray-800 text-sm truncate">{item.name}</h3>
-              <p className="text-brand-orange-600 font-bold text-sm">{formatPrice(item.price)} TL / {item.unit}</p>
-              {item.quantity >= item.stockQuantity && (
-                <p className="text-[10px] text-red-500 font-medium">Maks. stok</p>
-              )}
-            </div>
-            <div className="flex items-center gap-1">
-              <button onClick={() => updateQuantity(item.productId, item.quantity - 1)}
-                className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center hover:bg-brand-orange-50 hover:text-brand-orange-600 transition">
-                <FiMinus size={16} />
-              </button>
-              <span className="w-8 text-center font-bold text-sm">{item.quantity}</span>
-              <button onClick={() => updateQuantity(item.productId, item.quantity + 1)}
-                disabled={item.quantity >= item.stockQuantity}
-                className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center hover:bg-brand-orange-50 hover:text-brand-orange-600 disabled:text-gray-300 disabled:hover:bg-gray-100 transition">
-                <FiPlus size={16} />
-              </button>
-            </div>
-            <p className="font-bold text-gray-800 w-20 text-right text-sm">
-              {formatPrice(item.price * item.quantity)} TL
-            </p>
-            <button onClick={() => removeFromCart(item.productId)}
-              className="text-gray-300 hover:text-red-500 p-1.5 transition">
-              <FiTrash2 size={16} />
-            </button>
-          </div>
-        ))}
+    <div>
+      <div className="mb-10">
+        <h1 className="text-4xl font-headline font-extrabold tracking-tight text-on-surface mb-2">Sepetim</h1>
+        <p className="text-slate-500">Taze ve dogal ürünler kapiniza gelmeye hazir.</p>
       </div>
 
-      {/* Sipariş Özeti */}
-      <div className="bg-white rounded-lg p-6 h-fit lg:sticky lg:top-24 border border-gray-100">
-        <h2 className="text-lg font-bold mb-4">Sipariş Özeti</h2>
-        <div className="space-y-3 text-sm">
-          <div className="flex justify-between">
-            <span className="text-gray-500">Ara Toplam</span>
-            <span className="font-medium">{formatPrice(total)} TL</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-gray-500">Teslimat</span>
-            <span className={deliveryFee === 0 ? 'text-green-600 font-bold' : 'font-medium'}>
-              {deliveryFee === 0 ? 'Ücretsiz' : `${formatPrice(deliveryFee)} TL`}
-            </span>
-          </div>
-          <hr className="border-gray-100" />
-          <div className="flex justify-between text-lg font-extrabold">
-            <span>Toplam</span>
-            <span className="text-brand-orange-600">{formatPrice(grandTotal)} TL</span>
-          </div>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        {/* Cart Items */}
+        <div className="lg:col-span-8 space-y-6">
+          {freeDeliveryRemaining > 0 && (
+            <div className="bg-secondary-container/20 p-4 rounded-xl flex items-start gap-3">
+              <Icon name="info" className="text-secondary" />
+              <p className="text-xs text-on-secondary-container leading-relaxed">
+                Ücretsiz teslimat icin <strong>{formatPrice(freeDeliveryRemaining)} TL</strong> daha ekleyin!
+              </p>
+            </div>
+          )}
+          {freeDeliveryRemaining <= 0 && (
+            <div className="bg-secondary-container/20 p-4 rounded-xl flex items-start gap-3">
+              <Icon name="info" className="text-secondary" />
+              <p className="text-xs text-on-secondary-container leading-relaxed">
+                Tebrikler! Ücretsiz teslimat hakki kazandiniz. <strong>Harika secim!</strong>
+              </p>
+            </div>
+          )}
+
+          {cartItems.map((item) => (
+            <div key={item.productId} className="bg-surface-container-lowest rounded-xl p-6 flex flex-col sm:flex-row items-center gap-6 shadow-sm hover:scale-[1.01] transition-transform duration-300">
+              <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-lg overflow-hidden flex-shrink-0 bg-surface-container-low">
+                {item.imageUrl ? (
+                  <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover" />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center">
+                    <Icon name="shopping_bag" className="text-slate-300 text-2xl" />
+                  </div>
+                )}
+              </div>
+
+              <div className="flex-grow space-y-1 text-center sm:text-left">
+                <span className="text-xs font-bold uppercase tracking-widest text-secondary mb-1 block">{item.unit}</span>
+                <h3 className="text-xl font-headline font-bold">{item.name}</h3>
+                <p className="text-sm text-slate-500">{formatPrice(item.price)} TL / {item.unit}</p>
+              </div>
+
+              <div className="flex items-center space-x-4 bg-surface-container-low rounded-full px-4 py-2">
+                <button
+                  onClick={() => updateQuantity(item.productId, item.quantity - 1)}
+                  className="text-primary hover:bg-white rounded-full w-8 h-8 flex items-center justify-center transition-colors"
+                >
+                  <Icon name="remove" size={16} />
+                </button>
+                <span className="font-bold w-4 text-center">{item.quantity}</span>
+                <button
+                  onClick={() => updateQuantity(item.productId, item.quantity + 1)}
+                  disabled={item.quantity >= item.stockQuantity}
+                  className="text-primary hover:bg-white rounded-full w-8 h-8 flex items-center justify-center transition-colors disabled:text-slate-300"
+                >
+                  <Icon name="add" size={16} />
+                </button>
+              </div>
+
+              <div className="text-right min-w-[80px]">
+                <p className="text-lg font-black text-on-surface">{formatPrice(item.price * item.quantity)} TL</p>
+                <button
+                  onClick={() => removeFromCart(item.productId)}
+                  className="text-xs text-error font-medium hover:underline mt-1"
+                >
+                  Sil
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
 
-        {isAuthenticated ? (
-          <Link
-            href="/checkout"
-            className="w-full bg-brand-orange-500 text-white py-3.5 rounded-lg font-bold mt-5 block text-center hover:bg-brand-orange-600 transition"
-          >
-            Siparişi Tamamla
-          </Link>
-        ) : (
-          <Link
-            href="/login"
-            className="w-full bg-brand-orange-500 text-white py-3.5 rounded-lg font-bold mt-5 block text-center hover:bg-brand-orange-600 transition"
-          >
-            Satın Almak İçin Giriş Yap
-          </Link>
-        )}
+        {/* Order Summary */}
+        <aside className="lg:col-span-4 sticky top-28">
+          <div className="bg-surface-container-low rounded-xl p-8 space-y-6">
+            <h2 className="text-2xl font-headline font-bold tracking-tight mb-4">Siparis Özeti</h2>
+            <div className="space-y-4 text-sm">
+              <div className="flex justify-between items-center text-slate-600">
+                <span>Ara Toplam</span>
+                <span className="font-semibold text-on-surface">{formatPrice(total)} TL</span>
+              </div>
+              <div className="flex justify-between items-center text-slate-600">
+                <span>Kargo Ücreti</span>
+                <span className={`font-semibold ${deliveryFee === 0 ? 'text-secondary' : 'text-on-surface'}`}>
+                  {deliveryFee === 0 ? 'Bedava' : `${formatPrice(deliveryFee)} TL`}
+                </span>
+              </div>
+            </div>
+
+            <div className="pt-6 border-t border-slate-200 flex justify-between items-end">
+              <span className="text-lg font-bold">Toplam</span>
+              <div className="text-right">
+                <p className="text-3xl font-black text-primary leading-none">{formatPrice(grandTotal)} TL</p>
+                <p className="text-[10px] text-slate-400 mt-1 uppercase tracking-widest">KDV Dahil</p>
+              </div>
+            </div>
+
+            {isAuthenticated ? (
+              <Link
+                href="/checkout"
+                className="w-full bg-gradient-to-r from-primary to-primary-container text-white font-bold py-4 rounded-full text-lg shadow-lg hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-3"
+              >
+                Alisverisi Tamamla
+                <Icon name="arrow_forward" />
+              </Link>
+            ) : (
+              <Link
+                href="/login"
+                className="w-full bg-gradient-to-r from-primary to-primary-container text-white font-bold py-4 rounded-full text-lg shadow-lg hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-3"
+              >
+                Satin Almak Icin Giris Yap
+                <Icon name="arrow_forward" />
+              </Link>
+            )}
+
+            <div className="flex justify-center gap-4 pt-4">
+              <Icon name="lock" className="text-slate-400 text-xl" />
+              <p className="text-[10px] text-slate-400 text-center max-w-[200px]">
+                Güvenli ödeme altyapisi ile bilgileriniz 256-bit SSL korumasi altindadir.
+              </p>
+            </div>
+          </div>
+        </aside>
       </div>
     </div>
   );

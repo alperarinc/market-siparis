@@ -5,7 +5,7 @@ import { logout as apiLogout } from '@/lib/api';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
-import { FiPackage, FiMapPin, FiLogOut, FiUser, FiPhone, FiShield } from 'react-icons/fi';
+import Icon from '@/components/Icon';
 
 export default function ProfilePage() {
   const { user, isAuthenticated, clearAuth } = useStore();
@@ -14,13 +14,11 @@ export default function ProfilePage() {
   if (!isAuthenticated || !user) {
     return (
       <div className="text-center py-20">
-        <div className="w-20 h-20 bg-brand-orange-50 rounded-full flex items-center justify-center mx-auto mb-4">
-          <FiUser className="text-brand-orange-500" size={32} />
+        <div className="w-20 h-20 bg-primary-fixed rounded-full flex items-center justify-center mx-auto mb-4">
+          <Icon name="person" className="text-primary text-3xl" />
         </div>
-        <p className="text-xl text-gray-500 mb-4">Profil sayfası için giriş yapın</p>
-        <Link href="/login" className="inline-block bg-brand-orange-500 text-white px-6 py-3 rounded-xl font-bold hover:bg-brand-orange-600 transition">
-          Giriş Yap
-        </Link>
+        <p className="text-xl text-slate-500 mb-4">Profil sayfasi icin giris yapin</p>
+        <Link href="/login" className="btn-primary inline-block">Giris Yap</Link>
       </div>
     );
   }
@@ -30,72 +28,123 @@ export default function ProfilePage() {
       await apiLogout();
     } catch {}
     clearAuth();
-    toast.success('Çıkış yapıldı');
+    toast.success('Cikis yapildi');
     router.push('/');
   };
 
   return (
-    <div className="max-w-2xl mx-auto">
-      <h1 className="text-2xl font-bold mb-6">Hesabım</h1>
-
-      {/* Profil Bilgileri */}
-      <div className="bg-white rounded-xl p-6 shadow-sm mb-4 border border-gray-100">
-        <div className="flex items-center gap-4 mb-4">
-          <div className="w-16 h-16 bg-gradient-to-br from-brand-orange-400 to-brand-orange-600 rounded-2xl flex items-center justify-center shadow-sm">
-            <span className="text-white text-xl font-bold">
-              {(user.fullName || 'K')[0].toUpperCase()}
-            </span>
+    <div className="flex flex-col md:flex-row gap-10 max-w-5xl mx-auto">
+      {/* Sidebar */}
+      <aside className="w-full md:w-72 shrink-0">
+        <div className="bg-surface-container-low p-6 rounded-xl space-y-2 sticky top-28">
+          <div className="flex items-center gap-4 mb-8 px-2">
+            <div className="w-14 h-14 rounded-full overflow-hidden bg-primary-fixed border-2 border-white shadow-sm flex items-center justify-center">
+              <span className="text-xl font-bold text-primary">
+                {(user.fullName || 'K')[0].toUpperCase()}
+              </span>
+            </div>
+            <div>
+              <h2 className="font-headline font-bold text-lg text-on-surface">{user.fullName || 'Kullanici'}</h2>
+              <p className="text-xs font-label uppercase tracking-widest text-slate-500">{user.phone}</p>
+            </div>
           </div>
-          <div>
-            <h2 className="text-lg font-bold text-gray-800">{user.fullName || 'İsimsiz Kullanıcı'}</h2>
-            <p className="text-gray-500 flex items-center gap-1.5 text-sm">
-              <FiPhone size={13} /> {user.phone}
-            </p>
+
+          <nav className="space-y-1">
+            <Link href="/orders" className="flex items-center gap-3 px-4 py-3.5 rounded-xl bg-primary-container text-on-primary-container font-bold shadow-sm transition-all">
+              <Icon name="receipt_long" />
+              <span className="font-label">Siparislerim</span>
+            </Link>
+            <Link href="/checkout" className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-slate-600 hover:bg-white/50 transition-colors">
+              <Icon name="location_on" />
+              <span className="font-label">Adreslerim</span>
+            </Link>
+            <Link href="/cart" className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-slate-600 hover:bg-white/50 transition-colors">
+              <Icon name="favorite" />
+              <span className="font-label">Favorilerim</span>
+            </Link>
+            {user.role === 'ADMIN' && (
+              <Link href="/admin" className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-slate-600 hover:bg-white/50 transition-colors">
+                <Icon name="admin_panel_settings" />
+                <span className="font-label">Admin Paneli</span>
+              </Link>
+            )}
+            <div className="pt-4 mt-4 border-t border-slate-200">
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-error hover:bg-error/5 transition-colors w-full"
+              >
+                <Icon name="logout" />
+                <span className="font-label">Oturumu Kapat</span>
+              </button>
+            </div>
+          </nav>
+        </div>
+      </aside>
+
+      {/* Main Content */}
+      <section className="flex-grow">
+        <div className="mb-10">
+          <h1 className="text-4xl font-headline font-black tracking-tighter text-on-surface mb-2">Hesabim</h1>
+          <p className="text-slate-500 font-body">Hesap bilgilerinizi ve siparislerinizi yönetin.</p>
+        </div>
+
+        {/* Quick Actions */}
+        <div className="space-y-4">
+          <Link href="/orders" className="block bg-surface-container-lowest editorial-shadow rounded-xl p-6 border border-slate-100 hover:scale-[1.01] transition-transform duration-300">
+            <div className="flex items-center gap-6">
+              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                <Icon name="local_shipping" size={28} />
+              </div>
+              <div className="flex-grow">
+                <h3 className="font-headline font-bold text-lg mb-1">Siparislerim</h3>
+                <p className="text-sm text-slate-500">Tüm gecmis ve aktif siparislerinizi buradan takip edebilirsiniz.</p>
+              </div>
+              <Icon name="arrow_forward" className="text-slate-400" />
+            </div>
+          </Link>
+
+          <Link href="/products" className="block bg-surface-container-lowest editorial-shadow rounded-xl p-6 border border-slate-100 hover:scale-[1.01] transition-transform duration-300">
+            <div className="flex items-center gap-6">
+              <div className="w-16 h-16 rounded-full bg-secondary/10 flex items-center justify-center text-secondary">
+                <Icon name="shopping_basket" size={28} />
+              </div>
+              <div className="flex-grow">
+                <h3 className="font-headline font-bold text-lg mb-1">Alisverise Devam Et</h3>
+                <p className="text-sm text-slate-500">Taze ürünlerimize göz atin.</p>
+              </div>
+              <Icon name="arrow_forward" className="text-slate-400" />
+            </div>
+          </Link>
+        </div>
+
+        {/* Support */}
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="bg-secondary/5 p-8 rounded-2xl flex items-center gap-6">
+            <div className="w-16 h-16 rounded-full bg-secondary/10 flex items-center justify-center text-secondary">
+              <Icon name="support_agent" size={28} />
+            </div>
+            <div>
+              <h3 className="font-headline font-bold text-lg mb-1">Yardima mi ihtiyaciniz var?</h3>
+              <p className="text-sm text-slate-500 mb-3">Siparisinizle ilgili bir sorun mu yasiyorsunuz?</p>
+              <Link href="/sayfa/iletisim" className="text-secondary font-bold text-sm flex items-center gap-1 hover:underline">
+                Iletisim <Icon name="arrow_forward" size={14} />
+              </Link>
+            </div>
+          </div>
+          <div className="bg-orange-50 p-8 rounded-2xl flex items-center gap-6">
+            <div className="w-16 h-16 rounded-full bg-orange-100 flex items-center justify-center text-primary">
+              <Icon name="star_rate" filled size={28} />
+            </div>
+            <div>
+              <h3 className="font-headline font-bold text-lg mb-1">Deneyiminizi Paylasin</h3>
+              <p className="text-sm text-slate-500 mb-3">Geri bildiriminiz bizim icin önemli.</p>
+              <Link href="/sayfa/iletisim" className="text-primary font-bold text-sm flex items-center gap-1 hover:underline">
+                Görüs Bildirin <Icon name="arrow_forward" size={14} />
+              </Link>
+            </div>
           </div>
         </div>
-        {user.role === 'ADMIN' && (
-          <Link href="/admin" className="inline-flex items-center gap-2 bg-brand-orange-50 text-brand-orange-700 px-4 py-2 rounded-xl text-sm font-bold hover:bg-brand-orange-100 transition">
-            <FiShield size={14} />
-            Admin Paneli →
-          </Link>
-        )}
-      </div>
-
-      {/* Menü */}
-      <div className="space-y-3">
-        <Link href="/orders" className="flex items-center gap-4 bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:border-brand-orange-200 hover:shadow-md transition group">
-          <div className="w-10 h-10 bg-brand-orange-50 rounded-xl flex items-center justify-center group-hover:bg-brand-orange-100 transition">
-            <FiPackage className="text-brand-orange-500" size={20} />
-          </div>
-          <div className="flex-1">
-            <p className="font-bold text-sm text-gray-800">Siparişlerim</p>
-            <p className="text-xs text-gray-500">Sipariş geçmişi ve takip</p>
-          </div>
-          <span className="text-gray-300 group-hover:text-brand-orange-500 transition">→</span>
-        </Link>
-
-        <Link href="/checkout" className="flex items-center gap-4 bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:border-brand-orange-200 hover:shadow-md transition group">
-          <div className="w-10 h-10 bg-brand-green-50 rounded-xl flex items-center justify-center group-hover:bg-brand-green-100 transition">
-            <FiMapPin className="text-brand-green-600" size={20} />
-          </div>
-          <div className="flex-1">
-            <p className="font-bold text-sm text-gray-800">Adreslerim</p>
-            <p className="text-xs text-gray-500">Teslimat adreslerini yönet</p>
-          </div>
-          <span className="text-gray-300 group-hover:text-brand-orange-500 transition">→</span>
-        </Link>
-
-        <button onClick={handleLogout}
-          className="flex items-center gap-4 bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:border-red-200 hover:shadow-md transition w-full text-left group">
-          <div className="w-10 h-10 bg-red-50 rounded-xl flex items-center justify-center group-hover:bg-red-100 transition">
-            <FiLogOut className="text-red-500" size={20} />
-          </div>
-          <div className="flex-1">
-            <p className="font-bold text-sm text-red-600">Çıkış Yap</p>
-            <p className="text-xs text-gray-500">Hesabınızdan güvenli çıkış</p>
-          </div>
-        </button>
-      </div>
+      </section>
     </div>
   );
 }

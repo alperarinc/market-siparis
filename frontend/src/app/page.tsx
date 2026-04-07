@@ -2,7 +2,6 @@ import { serverFetch } from '@/lib/server-api';
 import BannerSlider from '@/components/BannerSlider';
 import ProductCard from '@/components/ProductCard';
 import Link from 'next/link';
-import { FiArrowRight, FiTruck, FiClock, FiShield, FiPercent } from 'react-icons/fi';
 
 export const dynamic = 'force-dynamic';
 
@@ -16,88 +15,151 @@ export default async function HomePage() {
   ]);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-16">
+      {/* Promo Banners */}
       {promoBanners?.length > 0 && (
         <BannerSlider banners={promoBanners} height="h-[100px] md:h-[120px]" interval={4000} />
       )}
 
+      {/* Hero Section */}
       {heroBanners?.length > 0 ? (
-        <BannerSlider banners={heroBanners} height="h-[250px] md:h-[400px]" interval={5000} />
+        <BannerSlider banners={heroBanners} height="h-[300px] md:h-[500px]" interval={5000} />
       ) : (
-        <section className="relative overflow-hidden rounded-xl bg-gradient-to-br from-brand-orange-600 to-brand-orange-500 text-white p-8 md:p-10 min-h-[250px] md:min-h-[400px] flex flex-col justify-center">
-          <h1 className="text-3xl md:text-4xl font-black leading-tight mb-3">
-            Taze Ürünler<br/>Kapınıza Gelsin
-          </h1>
-          <p className="text-orange-100 text-sm mb-6 max-w-sm">
-            Meyve, sebze, et, şarküteri ve daha fazlası — her gün taze, her gün uygun fiyat.
-          </p>
-          <Link href="/products" className="inline-flex items-center gap-2 bg-white text-brand-orange-600 px-6 py-3 rounded-lg font-bold text-sm hover:bg-orange-50 transition w-fit">
-            Alışverişe Başla <FiArrowRight size={16} />
-          </Link>
+        <section className="relative min-h-[400px] md:min-h-[550px] flex items-center overflow-hidden bg-surface-container rounded-4xl">
+          <div className="max-w-screen-2xl mx-auto px-8 grid md:grid-cols-2 gap-12 items-center w-full relative z-10">
+            <div className="space-y-8">
+              <span className="inline-block px-4 py-1.5 rounded-full bg-secondary-container text-on-secondary-container text-sm font-medium uppercase tracking-wider">
+                Mevsimlik Hasat Geldi
+              </span>
+              <h1 className="font-headline text-4xl md:text-6xl font-black tracking-tight text-on-surface leading-[1.1]">
+                Yerel Tarlalardan <br />
+                <span className="text-primary-container">Mutfaginiza.</span>
+              </h1>
+              <p className="text-on-surface-variant text-lg max-w-lg leading-relaxed">
+                Akdeniz'in en taze lezzetlerini kesfeden. El yapimi, organik ürünler 24 saat icinde kapinizda.
+              </p>
+              <div className="flex flex-wrap gap-4 pt-4">
+                <Link
+                  href="/products"
+                  className="px-10 py-4 bg-gradient-to-br from-primary to-primary-container text-white rounded-full font-semibold shadow-lg shadow-primary/20 hover:scale-105 transition-transform"
+                >
+                  Simdi Alisveris Yap
+                </Link>
+                <Link
+                  href="/products"
+                  className="px-10 py-4 bg-surface-container-highest text-on-surface rounded-full font-semibold hover:bg-surface-container-high transition-colors"
+                >
+                  Kategorileri Kesfet
+                </Link>
+              </div>
+            </div>
+          </div>
+          <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-primary/5 to-transparent" />
         </section>
       )}
 
-      <section className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        {settings?.free_delivery_enabled === 'true' && (
-          <div className="bg-white rounded-lg p-4 flex items-center gap-3 border border-gray-100">
-            <div className="w-10 h-10 rounded-lg bg-brand-orange-50 flex items-center justify-center text-brand-orange-500"><FiTruck size={20} /></div>
-            <div><p className="text-sm font-semibold text-gray-900">Ücretsiz Teslimat</p><p className="text-xs text-gray-400">{settings.free_delivery_min || '200'} TL üstü</p></div>
+      {/* Feature Badges */}
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="flex items-center gap-4 p-6 bg-surface-container-lowest rounded-4xl">
+          <div className="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center text-secondary">
+            <span className="material-symbols-outlined">local_shipping</span>
           </div>
-        )}
-        {settings?.same_day_enabled === 'true' && (
-          <div className="bg-white rounded-lg p-4 flex items-center gap-3 border border-gray-100">
-            <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center text-blue-500"><FiClock size={20} /></div>
-            <div><p className="text-sm font-semibold text-gray-900">Aynı Gün Teslimat</p><p className="text-xs text-gray-400">{settings.same_day_cutoff || '14:00'} öncesi</p></div>
+          <div>
+            <p className="font-headline font-bold text-on-surface">Ayni Gün Teslimat</p>
+            <p className="text-sm text-on-surface-variant">
+              {settings?.free_delivery_min || '200'} TL üstü ücretsiz
+            </p>
           </div>
-        )}
-        <div className="bg-white rounded-lg p-4 flex items-center gap-3 border border-gray-100">
-          <div className="w-10 h-10 rounded-lg bg-green-50 flex items-center justify-center text-brand-green-600"><FiShield size={20} /></div>
-          <div><p className="text-sm font-semibold text-gray-900">Güvenli Alışveriş</p><p className="text-xs text-gray-400">Kalite garantisi</p></div>
         </div>
-        <div className="bg-white rounded-lg p-4 flex items-center gap-3 border border-gray-100">
-          <div className="w-10 h-10 rounded-lg bg-red-50 flex items-center justify-center text-red-500"><FiPercent size={20} /></div>
-          <div><p className="text-sm font-semibold text-gray-900">Haftalık Fırsatlar</p><p className="text-xs text-gray-400">Özel indirimler</p></div>
+        <div className="flex items-center gap-4 p-6 bg-surface-container-lowest rounded-4xl">
+          <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+            <span className="material-symbols-outlined">verified</span>
+          </div>
+          <div>
+            <p className="font-headline font-bold text-on-surface">Kalite Garantisi</p>
+            <p className="text-sm text-on-surface-variant">Sertifikali organik ürünler</p>
+          </div>
+        </div>
+        <div className="flex items-center gap-4 p-6 bg-surface-container-lowest rounded-4xl">
+          <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center text-primary-container">
+            <span className="material-symbols-outlined">eco</span>
+          </div>
+          <div>
+            <p className="font-headline font-bold text-on-surface">Sürdürülebilir Tedarik</p>
+            <p className="text-sm text-on-surface-variant">40+ yerel üreticiyle ortaklik</p>
+          </div>
         </div>
       </section>
 
+      {/* Categories Bento Grid */}
       {categories?.length > 0 && (
         <section>
-          <div className="flex items-center justify-between mb-5">
-            <h2 className="text-xl font-bold text-gray-900">Kategoriler</h2>
-            <Link href="/products" className="text-sm text-brand-orange-500 hover:text-brand-orange-600 font-semibold flex items-center gap-1">Tümünü Gör <FiArrowRight size={14} /></Link>
+          <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div>
+              <h2 className="font-headline text-3xl font-bold text-on-surface mb-2">Kategoriler</h2>
+              <p className="text-on-surface-variant">En iyi yerel üreticilerden özenle secilmis ürünler</p>
+            </div>
+            <Link href="/products" className="text-primary font-semibold flex items-center gap-2 group">
+              Tüm Kategorileri Gör
+              <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+            </Link>
           </div>
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
             {categories.map((cat: any) => (
-              <Link key={cat.id} href={`/products?category=${cat.id}`} className="group bg-white rounded-lg p-4 text-center hover:shadow-md transition border border-gray-100 hover:border-brand-orange-200">
-                <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">{cat.icon || '📦'}</div>
-                <p className="text-xs font-semibold text-gray-700 group-hover:text-brand-orange-600 transition-colors leading-tight">{cat.name}</p>
+              <Link
+                key={cat.id}
+                href={`/products?category=${cat.id}`}
+                className="group bg-surface-container-lowest rounded-3xl p-6 text-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+              >
+                <div className="text-4xl mb-3 group-hover:scale-110 transition-transform">{cat.icon || '🛒'}</div>
+                <p className="text-sm font-headline font-bold text-on-surface group-hover:text-primary transition-colors">{cat.name}</p>
               </Link>
             ))}
           </div>
         </section>
       )}
 
+      {/* Featured Products */}
       {featured?.length > 0 && (
         <section>
-          <div className="flex items-center justify-between mb-5">
-            <div className="flex items-center gap-3">
-              <h2 className="text-xl font-bold text-gray-900">Çok Satanlar</h2>
-              <span className="bg-red-50 text-red-600 text-[11px] font-bold px-2.5 py-1 rounded-full">Popüler</span>
+          <div className="flex items-end justify-between mb-10">
+            <div>
+              <h2 className="font-headline text-3xl font-bold text-on-surface mb-2">Yerel Favoriler</h2>
+              <p className="text-on-surface-variant">Müsterilerimizin en cok tercih ettigi ürünler</p>
             </div>
-            <Link href="/products" className="text-sm text-brand-orange-500 hover:text-brand-orange-600 font-semibold flex items-center gap-1">Tümünü Gör <FiArrowRight size={14} /></Link>
+            <Link href="/products" className="text-primary font-semibold flex items-center gap-2 group">
+              Tümünü Gör
+              <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+            </Link>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
-            {featured.map((product: any) => (<ProductCard key={product.id} product={product} />))}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+            {featured.map((product: any) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
           </div>
         </section>
       )}
 
-      <section className="bg-gray-900 rounded-xl p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
-        <div>
-          <h3 className="text-2xl font-bold text-white mb-2">İlk Siparişine Özel</h3>
-          <p className="text-gray-400 text-sm max-w-md">Hemen üye ol, ilk siparişinde ücretsiz teslimat fırsatını yakala.</p>
+      {/* CTA Section */}
+      <section className="relative bg-primary-container rounded-4xl overflow-hidden p-10 md:p-16 flex flex-col justify-end min-h-[300px]">
+        <div className="relative z-10">
+          <span className="inline-block px-4 py-1 rounded-full bg-white/20 text-white text-[10px] font-black uppercase tracking-widest mb-4">
+            Ilk Siparise Özel
+          </span>
+          <h2 className="font-headline font-black text-3xl md:text-4xl text-white leading-tight mb-4">
+            Hemen Üye Ol,<br />Ücretsiz Teslimat Kazan
+          </h2>
+          <p className="text-white/80 text-sm font-medium mb-8 max-w-md">
+            Ilk siparisinde ücretsiz teslimat firsatini yakala. Taze ürünler kapinda.
+          </p>
+          <Link
+            href="/login"
+            className="inline-flex items-center gap-2 bg-white text-primary-container font-headline font-bold px-8 py-4 rounded-full hover:scale-105 transition-transform"
+          >
+            Hemen Üye Ol
+            <span className="material-symbols-outlined">arrow_forward</span>
+          </Link>
         </div>
-        <Link href="/login" className="bg-brand-orange-500 text-white px-8 py-3.5 rounded-lg font-bold text-sm hover:bg-brand-orange-600 transition shrink-0">Hemen Üye Ol</Link>
       </section>
     </div>
   );

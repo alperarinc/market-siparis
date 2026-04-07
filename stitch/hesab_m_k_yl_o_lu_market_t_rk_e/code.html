@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html class="light" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#9ef578",
+                        "primary-fixed": "#ffdbc9",
+                        "on-primary": "#ffffff",
+                        "surface-tint": "#9a4600",
+                        "on-secondary-container": "#247200",
+                        "background": "#f8f9ff",
+                        "on-surface": "#151c25",
+                        "inverse-on-surface": "#eaf1fe",
+                        "tertiary-container": "#98979a",
+                        "primary-container": "#e8792b",
+                        "on-secondary-fixed-variant": "#185200",
+                        "surface-container-high": "#e2e8f5",
+                        "on-secondary-fixed": "#052100",
+                        "surface-variant": "#dce3f0",
+                        "on-surface-variant": "#564338",
+                        "secondary-fixed": "#a0f87a",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#5f5e61",
+                        "on-tertiary-container": "#303033",
+                        "inverse-surface": "#2a313b",
+                        "on-error": "#ffffff",
+                        "surface": "#f8f9ff",
+                        "on-background": "#151c25",
+                        "tertiary-fixed-dim": "#c8c6c9",
+                        "on-primary-container": "#512200",
+                        "inverse-primary": "#ffb68c",
+                        "secondary": "#226d00",
+                        "surface-container": "#e7eefb",
+                        "tertiary-fixed": "#e4e1e5",
+                        "surface-dim": "#d4dae7",
+                        "outline-variant": "#ddc1b2",
+                        "primary-fixed-dim": "#ffb68c",
+                        "outline": "#8a7266",
+                        "on-tertiary-fixed": "#1b1b1e",
+                        "surface-container-highest": "#dce3f0",
+                        "on-error-container": "#93000a",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#47464a",
+                        "on-primary-fixed": "#321200",
+                        "surface-container-low": "#eef4ff",
+                        "error": "#ba1a1a",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#753400",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f8f9ff",
+                        "secondary-fixed-dim": "#85db61",
+                        "primary": "#9a4600"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Be Vietnam Pro"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-shadow {
+            box-shadow: 0 12px 40px -12px rgba(21, 28, 37, 0.06);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9ff;
+        }
+        h1, h2, h3 {
+            font-family: 'Be Vietnam Pro', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-xl shadow-sm">
+<div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+<div class="text-2xl font-bold text-orange-800 tracking-tight font-headline">Köylüoğlu Market</div>
+<div class="hidden md:flex gap-8 font-headline tracking-tight">
+<a class="text-slate-600 hover:text-orange-700 transition-colors" href="#">Taze Sebze &amp; Meyve</a>
+<a class="text-slate-600 hover:text-orange-700 transition-colors" href="#">Süt Ürünleri</a>
+<a class="text-slate-600 hover:text-orange-700 transition-colors" href="#">Fırın</a>
+<a class="text-slate-600 hover:text-orange-700 transition-colors" href="#">Organik</a>
+</div>
+<div class="flex items-center gap-5">
+<button class="p-2 hover:bg-slate-50 rounded-full transition-colors"><span class="material-symbols-outlined" data-icon="favorite">favorite</span></button>
+<button class="p-2 hover:bg-slate-50 rounded-full transition-colors"><span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span></button>
+<button class="p-2 hover:bg-slate-50 rounded-full transition-colors"><span class="material-symbols-outlined" data-icon="shopping_basket">shopping_basket</span></button>
+<button class="flex items-center gap-2 p-1.5 pr-4 bg-primary-container text-on-primary-container rounded-full font-bold transition-all active:scale-95">
+<span class="material-symbols-outlined bg-white/20 p-1 rounded-full text-white" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label text-sm">Profilim</span>
+</button>
+</div>
+</div>
+<div class="bg-slate-100 h-px"></div>
+</nav>
+<main class="pt-24 pb-20 px-6 max-w-7xl mx-auto min-h-screen">
+<div class="flex flex-col md:flex-row gap-10">
+<!-- Sidebar Navigation -->
+<aside class="w-full md:w-72 shrink-0">
+<div class="bg-surface-container-low p-6 rounded-xl space-y-2 sticky top-28">
+<div class="flex items-center gap-4 mb-8 px-2">
+<div class="w-14 h-14 rounded-full overflow-hidden bg-primary-fixed border-2 border-white shadow-sm">
+<img alt="Kullanıcı" class="w-full h-full object-cover" data-alt="portrait of a middle aged man with a warm smile wearing a linen shirt in a natural light setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAM6nx3VPFrE7E69ohg-YmZYcwXykAbXyvH9pvB4imtU0YBtZ_ruRHv26oaURyVWueMV6MhljUCM087c7RiajWK8z0vX1cOOUP83FEmdkFrHXFj9yo28bQU9X1d0kt41tApUyKyUwJE42CcbiIhFzOyQWhuw5y3lpW9XiEVr1ZxqAVE7MuS0_ZajQuC_oPLIBmu1df96sPicIyEPKQk4CQcilqws_pd3ixD5N1yZIijTBRVsOdqIZGqaXv1JHnL-sgdS57hsf_ZDIBZ"/>
+</div>
+<div>
+<h2 class="font-headline font-bold text-lg text-on-surface">Ahmet Köylü</h2>
+<p class="text-xs font-label uppercase tracking-widest text-slate-500">Gurme Üye</p>
+</div>
+</div>
+<nav class="space-y-1">
+<!-- ACTIVE TAB: Siparişlerim (Current context) -->
+<a class="flex items-center gap-3 px-4 py-3.5 rounded-xl bg-primary-container text-on-primary-container font-bold shadow-sm transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="font-label">Siparişlerim</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3.5 rounded-xl text-slate-600 hover:bg-white/50 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+<span class="font-label">Adreslerim</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3.5 rounded-xl text-slate-600 hover:bg-white/50 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+<span class="font-label">Favorilerim</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3.5 rounded-xl text-slate-600 hover:bg-white/50 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label">Hesap Ayarları</span>
+</a>
+<div class="pt-4 mt-4 border-t border-slate-200">
+<a class="flex items-center gap-3 px-4 py-3.5 rounded-xl text-error hover:bg-error/5 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label">Oturumu Kapat</span>
+</a>
+</div>
+</nav>
+</div>
+</aside>
+<!-- Main Content Area -->
+<section class="flex-grow">
+<div class="mb-10">
+<h1 class="text-4xl font-headline font-black tracking-tighter text-on-surface mb-2">Siparişlerim</h1>
+<p class="text-slate-500 font-body">Tüm geçmiş ve aktif siparişlerinizi buradan takip edebilirsiniz.</p>
+</div>
+<!-- Order Filter Chips -->
+<div class="flex gap-3 mb-8 overflow-x-auto pb-2 no-scrollbar">
+<button class="px-6 py-2.5 rounded-full bg-secondary-container text-on-secondary-container font-bold text-sm">Tümü</button>
+<button class="px-6 py-2.5 rounded-full bg-surface-container-high text-slate-600 font-medium text-sm hover:bg-surface-container-highest">Devam Edenler</button>
+<button class="px-6 py-2.5 rounded-full bg-surface-container-high text-slate-600 font-medium text-sm hover:bg-surface-container-highest">Tamamlananlar</button>
+<button class="px-6 py-2.5 rounded-full bg-surface-container-high text-slate-600 font-medium text-sm hover:bg-surface-container-highest">İptal Edilenler</button>
+</div>
+<!-- Orders List -->
+<div class="space-y-6">
+<!-- Order Card 1: Active -->
+<div class="bg-surface-container-lowest editorial-shadow rounded-xl overflow-hidden border border-slate-100 hover:scale-[1.01] transition-transform duration-300">
+<div class="p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-slate-50/50 border-b border-slate-100">
+<div class="flex flex-wrap gap-6">
+<div>
+<p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-1">SİPARİŞ TARİHİ</p>
+<p class="font-bold text-sm text-on-surface">12 Ekim 2024</p>
+</div>
+<div>
+<p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-1">TOPLAM</p>
+<p class="font-bold text-sm text-primary">1.240,50 TL</p>
+</div>
+<div>
+<p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-1">SİPARİŞ NO</p>
+<p class="font-bold text-sm text-on-surface">#KM-884920</p>
+</div>
+</div>
+<div class="flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-100 text-orange-800">
+<span class="material-symbols-outlined text-sm" data-icon="local_shipping">local_shipping</span>
+<span class="text-xs font-bold font-label uppercase tracking-wider">Kurye Yolda</span>
+</div>
+</div>
+<div class="p-6 flex flex-col md:flex-row items-center gap-8">
+<div class="flex -space-x-4">
+<div class="w-16 h-16 rounded-xl border-2 border-white shadow-sm overflow-hidden bg-white">
+<img class="w-full h-full object-cover" data-alt="vibrant fresh organic cherry tomatoes in a wooden bowl soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXPvOM3_yIj5gRytTWBtoTQZ1oOycntoDrV6mYM980ZXgcep__1-r5U4iUcgz4i0ODlrmSXu0xW-osgNn2PH0y0MfgJj2NfWzTCyybFQOE3BFT03B8gIj_70CD8-t6997ner2hzCJjtsCrYj0tM_DJdogLzRzI49Po1Ys9xI1mh6Oajmf9O_StYjI0UZdahtdqo4tNE3USoFyIDF8I4WrCr5ISRt_BQ6fzSL7O9aZog9PLnoi1VtsJCpQMs7BSU1-FaxEkKy7qkHWy"/>
+</div>
+<div class="w-16 h-16 rounded-xl border-2 border-white shadow-sm overflow-hidden bg-white">
+<img class="w-full h-full object-cover" data-alt="selection of artisanal cheeses and grapes on a wooden board rustic aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiAiz0k0u2kn2WsF56wx0rj2WAYD0wpJvXW3Xf_PTQXWY4Hb9B_7D1vwBVQ09fSiHgCzArFF8lwRabHh_Lpquicq6BTcW_GDqYD2HecwSjRLcS1v36Ssqksv_G_gvCVtYiBhKPcAhjPot3Ew9FoK6YIesqFDztmOFQ8c93wnbOA8lg3X_FPs_NLMpSCYDWwH3jH7aiAPO8VehdVwBjCFRrD6f7PIE5MaMrpFzghdM9j97Zww6L-ZVQDLvgWZqNVEBywXJmZg9zhQHn"/>
+</div>
+<div class="w-16 h-16 rounded-xl border-2 border-white shadow-sm overflow-hidden bg-white flex items-center justify-center text-xs font-bold text-slate-400">
+                                    +4
+                                </div>
+</div>
+<div class="flex-grow">
+<p class="text-sm font-body text-slate-600 mb-1">Organik Çeri Domates, Kars Gravyeri ve 4 ürün daha...</p>
+<p class="text-xs text-slate-400">Tahmini Teslimat: <span class="font-bold">Bugün, 14:30 - 15:00</span></p>
+</div>
+<div class="flex gap-3 shrink-0">
+<button class="px-6 py-2.5 rounded-full bg-surface-container-high text-on-surface font-bold text-sm transition-all hover:bg-surface-container-highest">Detaylar</button>
+<button class="px-6 py-2.5 rounded-full bg-primary text-white font-bold text-sm shadow-sm transition-all hover:opacity-90 active:scale-95">Takip Et</button>
+</div>
+</div>
+</div>
+<!-- Order Card 2: Delivered -->
+<div class="bg-surface-container-lowest editorial-shadow rounded-xl overflow-hidden border border-slate-100 hover:scale-[1.01] transition-transform duration-300">
+<div class="p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-slate-50/50 border-b border-slate-100">
+<div class="flex flex-wrap gap-6">
+<div>
+<p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-1">SİPARİŞ TARİHİ</p>
+<p class="font-bold text-sm text-on-surface">5 Ekim 2024</p>
+</div>
+<div>
+<p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-1">TOPLAM</p>
+<p class="font-bold text-sm text-primary">845,00 TL</p>
+</div>
+<div>
+<p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-1">SİPARİŞ NO</p>
+<p class="font-bold text-sm text-on-surface">#KM-881042</p>
+</div>
+</div>
+<div class="flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary-container/30 text-secondary">
+<span class="material-symbols-outlined text-sm" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-xs font-bold font-label uppercase tracking-wider">Teslim Edildi</span>
+</div>
+</div>
+<div class="p-6 flex flex-col md:flex-row items-center gap-8">
+<div class="flex -space-x-4">
+<div class="w-16 h-16 rounded-xl border-2 border-white shadow-sm overflow-hidden bg-white">
+<img class="w-full h-full object-cover" data-alt="freshly baked sourdough bread loaf with a crispy crust on a linen cloth" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwn7Az8Flc1UADPPcM2wTcI11dLpZ5MR-aqoEO7u2Hg5NkuPNtkeJGujgczg1Q7KNweSN0WqOc5AqcxusVvwiF8U03nJ00g-I4dvb1-oFm_4IEUxfEOLu8OLuLIfJppu4919XFQ5RVM1hbAyT2hSTBAf2NaJuQaO6QyOrMzL2K_P3eKkiaU9nKiOVbMO1mxgBr_Ig-2TXLHbAdJTUIGEvEv67nnqOm0Qwtd-2UiEB1cfIrJ4q1k7ssFWDeOGziHll0FWzySyl9GE2d"/>
+</div>
+<div class="w-16 h-16 rounded-xl border-2 border-white shadow-sm overflow-hidden bg-white">
+<img class="w-full h-full object-cover" data-alt="variety of fresh farm eggs in a carton with soft morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUjrw9QgPrD3P4dJDCpZzbjuuuFHLvznngug_rt1kBFXBgyEG7xZ6x3F6Q7_J2t8rl52J0GzrUcCbuT32je81cbPT3Af_4ttXBi_qZ0foqvTeGDCrNRthWXQIxgkupZW4Z5WpwqYFqUe1mtwCk0un4TiYECOXm80GqEvuPYBJa6ypy7FkGewrjnDTlkm2cqQkaU91kwL0dWLZh1FA5habdxjMZdpTXsVembaInscCOfj6VJMt9xMSK0CRe8sGOnqdrzpzUzBAyJHKu"/>
+</div>
+<div class="w-16 h-16 rounded-xl border-2 border-white shadow-sm overflow-hidden bg-white flex items-center justify-center text-xs font-bold text-slate-400">
+                                    +1
+                                </div>
+</div>
+<div class="flex-grow">
+<p class="text-sm font-body text-slate-600 mb-1">Ekşi Mayalı Köy Ekmeği, Serbest Gezen Tavuk Yumurtası...</p>
+<p class="text-xs text-slate-400">Teslim Tarihi: <span class="font-bold">5 Ekim 2024, 11:15</span></p>
+</div>
+<div class="flex gap-3 shrink-0">
+<button class="px-6 py-2.5 rounded-full bg-surface-container-high text-on-surface font-bold text-sm transition-all hover:bg-surface-container-highest">Detaylar</button>
+<button class="flex items-center gap-2 px-6 py-2.5 rounded-full border-2 border-primary text-primary font-bold text-sm transition-all hover:bg-primary/5 active:scale-95">
+<span class="material-symbols-outlined text-sm" data-icon="replay">replay</span>
+                                    Tekrarla
+                                </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Support Section (Bento Style) -->
+<div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-secondary/5 p-8 rounded-2xl flex items-center gap-6">
+<div class="w-16 h-16 rounded-full bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-3xl" data-icon="support_agent">support_agent</span>
+</div>
+<div>
+<h3 class="font-headline font-bold text-lg mb-1">Yardıma mı ihtiyacınız var?</h3>
+<p class="text-sm text-slate-500 mb-4 font-body leading-relaxed">Siparişinizle ilgili bir sorun mu yaşıyorsunuz? Canlı destek ekibimiz 7/24 yanınızda.</p>
+<button class="text-secondary font-bold text-sm flex items-center gap-1 hover:underline">
+                                Canlı Destek Başlat <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="bg-orange-50 p-8 rounded-2xl flex items-center gap-6">
+<div class="w-16 h-16 rounded-full bg-orange-100 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl" data-icon="star_rate" style="font-variation-settings: 'FILL' 1;">star_rate</span>
+</div>
+<div>
+<h3 class="font-headline font-bold text-lg mb-1">Deneyiminizi Puanlayın</h3>
+<p class="text-sm text-slate-500 mb-4 font-body leading-relaxed">Son siparişinizdeki ürünleri değerlendirin, bir sonraki alışverişinizde indirim kazanın.</p>
+<button class="text-primary font-bold text-sm flex items-center gap-1 hover:underline">
+                                Puanlamaya Git <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-50 border-t border-slate-200">
+<div class="max-w-7xl mx-auto px-8 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+<div class="space-y-4">
+<div class="font-be-vietnam-pro font-black text-xl text-orange-800">Köylüoğlu Market</div>
+<p class="text-slate-500 text-sm font-body leading-relaxed">Tarladan kapınıza, en taze ve gurme lezzetleri ulaştırıyoruz. Doğallığın adresi Köylüoğlu.</p>
+</div>
+<div>
+<h4 class="font-headline font-bold text-sm uppercase tracking-widest text-slate-800 mb-6">Kurumsal Bilgiler</h4>
+<ul class="space-y-3 font-inter text-sm">
+<li><a class="text-slate-500 hover:text-orange-600 hover:underline transition-colors" href="#">Hakkımızda</a></li>
+<li><a class="text-slate-500 hover:text-orange-600 hover:underline transition-colors" href="#">Sürdürülebilirlik</a></li>
+<li><a class="text-slate-500 hover:text-orange-600 hover:underline transition-colors" href="#">Kariyer</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline font-bold text-sm uppercase tracking-widest text-slate-800 mb-6">Yardım Merkezi</h4>
+<ul class="space-y-3 font-inter text-sm">
+<li><a class="text-slate-500 hover:text-orange-600 hover:underline transition-colors" href="#">SSS</a></li>
+<li><a class="text-slate-500 hover:text-orange-600 hover:underline transition-colors" href="#">Teslimat Bilgileri</a></li>
+<li><a class="text-slate-500 hover:text-orange-600 hover:underline transition-colors" href="#">İade Politikası</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline font-bold text-sm uppercase tracking-widest text-slate-800 mb-6">E-Bülten Kaydı</h4>
+<div class="flex">
+<input class="bg-white border border-slate-200 rounded-l-xl px-4 py-2 text-sm focus:outline-none focus:border-primary flex-grow" placeholder="E-posta adresiniz" type="email"/>
+<button class="bg-primary text-white px-4 py-2 rounded-r-xl transition-all hover:opacity-90">
+<span class="material-symbols-outlined text-sm" data-icon="send">send</span>
+</button>
+</div>
+<p class="text-[10px] text-slate-400 mt-4">© 2024 Köylüoğlu Market. Gourmet Experience.</p>
+</div>
+</div>
+</footer>
+</body></html>

@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Header from '@/components/Header';
 import Link from 'next/link';
-import { FiMapPin, FiPhone, FiMail } from 'react-icons/fi';
+import Icon from '@/components/Icon';
 import { getCategories } from '@/lib/api';
 
 export default function MainShell({ children }: { children: React.ReactNode }) {
@@ -27,75 +27,78 @@ export default function MainShell({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Header />
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6">{children}</main>
+      <main className="max-w-screen-2xl mx-auto px-6 py-8">{children}</main>
 
-      <footer className="bg-gray-900 text-gray-400 mt-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          {/* Main footer */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-12 border-b border-gray-800">
-            <div className="col-span-2 md:col-span-1">
-              <div className="flex items-center gap-2 mb-4">
-                <img src="/logo.png" alt="Köylüoğlu Fresh" className="h-8 w-8 rounded-full object-cover border border-gray-700" />
-                <div className="flex flex-col leading-tight">
-                  <span className="text-sm font-black text-white">KÖYLÜOĞLU</span>
-                  <span className="text-[9px] font-bold text-brand-green-500 tracking-widest uppercase">Fresh Market</span>
-                </div>
-              </div>
-              <p className="text-sm text-gray-500 leading-relaxed">
-                Taze meyve, sebze, et, şarküteri ve günlük ihtiyaçlarınız için güvenilir zincir marketiniz.
-              </p>
+      {/* Footer */}
+      <footer className="w-full border-t border-slate-200 bg-slate-50 mt-24">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 px-6 md:px-12 py-16 max-w-screen-2xl mx-auto">
+          {/* Brand */}
+          <div className="space-y-6">
+            <div className="font-headline font-black text-xl text-orange-800 uppercase tracking-tighter">
+              Köylüoğlu Market
             </div>
-
-            <div>
-              <h4 className="text-sm font-semibold text-white mb-4">Kategoriler</h4>
-              <ul className="space-y-2.5 text-sm">
-                {footerCategories.map((cat: any) => (
-                  <li key={cat.id}>
-                    <Link href={`/products?category=${cat.id}`} className="hover:text-white transition">{cat.name}</Link>
-                  </li>
-                ))}
-                <li><Link href="/products" className="hover:text-white transition">Tüm Ürünler</Link></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-sm font-semibold text-white mb-4">Hesabım</h4>
-              <ul className="space-y-2.5 text-sm">
-                <li><Link href="/profile" className="hover:text-white transition">Profilim</Link></li>
-                <li><Link href="/orders" className="hover:text-white transition">Siparişlerim</Link></li>
-                <li><Link href="/cart" className="hover:text-white transition">Sepetim</Link></li>
-                <li><Link href="/login" className="hover:text-white transition">Giriş Yap</Link></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-sm font-semibold text-white mb-4">İletişim</h4>
-              <ul className="space-y-3 text-sm">
-                <li className="flex items-start gap-2">
-                  <FiPhone size={14} className="mt-0.5 shrink-0" />
-                  0850 XXX XX XX
-                </li>
-                <li className="flex items-start gap-2">
-                  <FiMail size={14} className="mt-0.5 shrink-0" />
-                  info@koyluoglufresh.com
-                </li>
-                <li className="flex items-start gap-2">
-                  <FiMapPin size={14} className="mt-0.5 shrink-0" />
-                  Tokat Merkez, Türkiye
-                </li>
-              </ul>
+            <p className="text-slate-500 text-sm leading-relaxed">
+              Tarladan sofranıza, en taze ve en doğal ürünleri özenle seçiyor ve sizin için paketliyoruz. Gerçek lezzeti keşfedin.
+            </p>
+            <div className="flex gap-4">
+              <a className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-primary transition-colors" href="#">
+                <Icon name="public" size={16} />
+              </a>
+              <a className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-primary transition-colors" href="#">
+                <Icon name="mail" size={16} />
+              </a>
             </div>
           </div>
 
-          {/* Bottom bar */}
-          <div className="py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-600">
-            <span>&copy; 2026 Köylüoğlu Fresh. Tüm hakları saklıdır.</span>
-            <div className="flex items-center gap-4 flex-wrap">
-              <Link href="/sayfa/hakkimizda" className="hover:text-gray-400 transition py-1">Hakkımızda</Link>
-              <Link href="/sayfa/kvkk" className="hover:text-gray-400 transition py-1">KVKK</Link>
-              <Link href="/sayfa/kullanim-kosullari" className="hover:text-gray-400 transition py-1">Kullanım Koşulları</Link>
-              <Link href="/sayfa/iletisim" className="hover:text-gray-400 transition py-1">İletişim</Link>
+          {/* Alisveris */}
+          <div>
+            <h4 className="font-headline font-bold text-on-surface mb-6">Alisveris</h4>
+            <ul className="space-y-4 text-sm font-body">
+              <li><Link className="text-slate-400 hover:text-orange-500 transition-opacity" href="/products">Tüm Ürünler</Link></li>
+              {footerCategories.map((cat: any) => (
+                <li key={cat.id}>
+                  <Link className="text-slate-400 hover:text-orange-500 transition-opacity" href={`/products?category=${cat.id}`}>
+                    {cat.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Destek */}
+          <div>
+            <h4 className="font-headline font-bold text-on-surface mb-6">Destek</h4>
+            <ul className="space-y-4 text-sm font-body">
+              <li><Link className="text-slate-400 hover:text-orange-500 transition-opacity" href="/sayfa/hakkimizda">Hakkimizda</Link></li>
+              <li><Link className="text-slate-400 hover:text-orange-500 transition-opacity" href="/sayfa/kvkk">KVKK</Link></li>
+              <li><Link className="text-slate-400 hover:text-orange-500 transition-opacity" href="/sayfa/kullanim-kosullari">Kullanim Kosullari</Link></li>
+              <li><Link className="text-slate-400 hover:text-orange-500 transition-opacity" href="/sayfa/iletisim">Iletisim</Link></li>
+            </ul>
+          </div>
+
+          {/* Newsletter */}
+          <div className="p-8 rounded-4xl bg-surface-container flex flex-col items-center justify-center text-center">
+            <h4 className="font-headline font-black text-lg mb-2">Bize Katilin</h4>
+            <p className="text-slate-500 text-xs mb-6">Haftalik kampanya ve firsatlardan haberdar olun.</p>
+            <div className="w-full relative">
+              <input
+                className="w-full bg-white border-none rounded-full px-6 py-3 text-sm focus:ring-2 focus:ring-primary/20 placeholder:text-slate-300"
+                placeholder="E-posta adresiniz"
+                type="email"
+              />
+              <button className="absolute right-1 top-1 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center hover:scale-105 transition-transform">
+                <Icon name="arrow_forward" size={16} />
+              </button>
             </div>
+          </div>
+        </div>
+
+        {/* Bottom bar */}
+        <div className="px-6 md:px-12 py-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4 max-w-screen-2xl mx-auto">
+          <span className="text-xs text-slate-500">&copy; 2026 Köylüoğlu Market. Tüm haklari saklidir.</span>
+          <div className="flex gap-8">
+            <Link className="text-xs text-slate-400 hover:text-orange-500" href="/sayfa/kvkk">Gizlilik Politikasi</Link>
+            <Link className="text-xs text-slate-400 hover:text-orange-500" href="/sayfa/kullanim-kosullari">Kullanim Kosullari</Link>
           </div>
         </div>
       </footer>

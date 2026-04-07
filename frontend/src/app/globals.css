@@ -2,32 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background-color: #f5f5f5;
-  color: #1a1a1a;
+  background-color: #f8f9ff;
+  color: #151c25;
   -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .font-headline {
+  font-family: 'Be Vietnam Pro', system-ui, sans-serif;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+}
+
+.glass-nav {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-brand-orange-500 text-white font-semibold rounded-lg px-6 py-3
-           hover:bg-brand-orange-600 active:bg-brand-orange-700
-           transition-all duration-200 shadow-sm hover:shadow-md;
+    @apply bg-gradient-to-r from-primary to-primary-container text-white font-bold rounded-full px-8 py-4
+           shadow-lg hover:scale-[1.02] active:scale-95 transition-all;
   }
   .btn-secondary {
-    @apply bg-brand-green-600 text-white font-semibold rounded-lg px-6 py-3
-           hover:bg-brand-green-700 transition-all duration-200;
+    @apply bg-surface-container-highest text-on-surface font-semibold rounded-full px-6 py-3
+           hover:bg-surface-container-high transition-colors;
   }
   .btn-outline {
-    @apply border-2 border-brand-orange-500 text-brand-orange-500 font-semibold rounded-lg px-6 py-3
-           hover:bg-brand-orange-500 hover:text-white transition-all duration-200;
+    @apply border-2 border-primary text-primary font-bold rounded-full px-6 py-3
+           hover:bg-primary/5 transition-all;
   }
   .card {
-    @apply bg-white rounded-xl border border-gray-100 shadow-sm
-           hover:shadow-lg transition-shadow duration-300;
+    @apply bg-surface-container-lowest rounded-4xl overflow-hidden
+           transition-all duration-300;
+  }
+  .editorial-shadow {
+    box-shadow: 0 12px 40px -12px rgba(21, 28, 37, 0.06);
   }
 }
 
@@ -38,5 +61,5 @@ body {
 
 html { scroll-behavior: smooth; }
 
-.hide-scrollbar::-webkit-scrollbar { display: none; }
-.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

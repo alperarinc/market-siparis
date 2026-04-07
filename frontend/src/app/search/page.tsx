@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { searchProducts } from '@/lib/api';
 import toast from 'react-hot-toast';
 import ProductCard from '@/components/ProductCard';
-import { FiSearch } from 'react-icons/fi';
+import Icon from '@/components/Icon';
 
 function SearchContent() {
   const searchParams = useSearchParams();
@@ -34,58 +34,61 @@ function SearchContent() {
   if (!query.trim()) {
     return (
       <div className="text-center py-20">
-        <div className="w-20 h-20 bg-brand-orange-50 rounded-full flex items-center justify-center mx-auto mb-4">
-          <FiSearch className="text-brand-orange-500" size={32} />
+        <div className="w-20 h-20 bg-primary-fixed rounded-full flex items-center justify-center mx-auto mb-4">
+          <Icon name="search" className="text-primary text-3xl" />
         </div>
-        <h2 className="text-xl text-gray-600 font-semibold">Aradığınız ürünü yazın</h2>
-        <p className="text-sm text-gray-400 mt-1">Meyve, sebze, et, süt ürünleri...</p>
+        <h2 className="text-xl font-headline font-bold text-on-surface">Aradiginiz ürünü yazin</h2>
+        <p className="text-sm text-on-surface-variant mt-1">Meyve, sebze, et, süt ürünleri...</p>
       </div>
     );
   }
 
   return (
     <div>
-      <div className="flex items-center gap-3 mb-6">
-        <div className="w-10 h-10 bg-brand-orange-50 rounded-xl flex items-center justify-center">
-          <FiSearch className="text-brand-orange-500" size={18} />
-        </div>
-        <div>
-          <h1 className="text-2xl font-bold">&ldquo;{query}&rdquo; için sonuçlar</h1>
-          <p className="text-sm text-gray-400">{products.length > 0 ? `${products.length} ürün bulundu` : ''}</p>
-        </div>
+      <div className="mb-10">
+        <h1 className="text-4xl font-headline font-black tracking-tight text-on-surface mb-2">
+          &ldquo;{query}&rdquo; icin sonuclar
+        </h1>
+        <p className="text-slate-500">{products.length > 0 ? `${products.length} ürün bulundu` : ''}</p>
       </div>
 
       {loading ? (
         <div className="flex justify-center py-20">
-          <div className="animate-spin rounded-full h-12 w-12 border-4 border-brand-orange-100 border-t-brand-orange-500" />
+          <div className="w-10 h-10 border-4 border-surface-container-high border-t-primary rounded-full animate-spin" />
         </div>
       ) : products.length === 0 ? (
-        <div className="text-center py-20 bg-white rounded-xl border border-gray-100">
-          <p className="text-5xl mb-4">😔</p>
-          <h2 className="text-xl text-gray-600 mb-2 font-semibold">Sonuç bulunamadı</h2>
-          <p className="text-gray-400 text-sm">Farklı bir arama terimi deneyin</p>
+        <div className="text-center py-20 bg-surface-container-lowest rounded-4xl">
+          <Icon name="search_off" className="text-slate-300 text-6xl mb-4" />
+          <h2 className="text-xl font-headline font-bold text-on-surface mb-2">Sonuc bulunamadi</h2>
+          <p className="text-on-surface-variant text-sm">Farkli bir arama terimi deneyin</p>
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8">
             {products.map((p: any) => (
               <ProductCard key={p.id} product={p} />
             ))}
           </div>
           {totalPages > 1 && (
-            <div className="flex justify-center items-center gap-2 mt-8">
-              <button onClick={() => setPage((p) => Math.max(0, p - 1))} disabled={page === 0}
-                className="px-4 py-2.5 rounded-xl bg-white border border-gray-200 text-sm font-semibold disabled:opacity-40 hover:border-brand-orange-300 transition">
-                ← Önceki
+            <footer className="mt-20 flex items-center justify-center gap-2">
+              <button
+                onClick={() => setPage((p) => Math.max(0, p - 1))}
+                disabled={page === 0}
+                className="w-12 h-12 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant hover:bg-primary-container transition-all disabled:opacity-40"
+              >
+                <Icon name="chevron_left" />
               </button>
-              <span className="px-4 py-2 text-sm text-gray-500 font-medium">
+              <span className="px-4 py-2 text-sm text-slate-500 font-headline font-bold">
                 {page + 1} / {totalPages}
               </span>
-              <button onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))} disabled={page >= totalPages - 1}
-                className="px-4 py-2.5 rounded-xl bg-white border border-gray-200 text-sm font-semibold disabled:opacity-40 hover:border-brand-orange-300 transition">
-                Sonraki →
+              <button
+                onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
+                disabled={page >= totalPages - 1}
+                className="w-12 h-12 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant hover:bg-primary-container transition-all disabled:opacity-40"
+              >
+                <Icon name="chevron_right" />
               </button>
-            </div>
+            </footer>
           )}
         </>
       )}
@@ -97,7 +100,7 @@ export default function SearchPage() {
   return (
     <Suspense fallback={
       <div className="flex justify-center py-20">
-        <div className="animate-spin rounded-full h-12 w-12 border-4 border-brand-orange-100 border-t-brand-orange-500" />
+        <div className="w-10 h-10 border-4 border-surface-container-high border-t-primary rounded-full animate-spin" />
       </div>
     }>
       <SearchContent />

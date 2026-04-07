@@ -5,7 +5,7 @@ import { sendOtp, verifyOtp, register } from '@/lib/api';
 import { useStore } from '@/lib/store';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
-import { FiPhone, FiLock, FiUser, FiMapPin, FiArrowLeft } from 'react-icons/fi';
+import Icon from '@/components/Icon';
 import { normalizePhone } from '@/lib/format';
 
 const TOKAT_MERKEZ_MAHALLELER = [
@@ -65,13 +65,11 @@ export default function LoginPage() {
 
   const handleVerifyRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    try {
-      // OTP doğrula ama giriş yapma, kayıt formuna geç
-      setStep('register-form');
-    } finally {
-      setLoading(false);
-    }
+    if (otp.length < 6) return;
+    // Kayıt modunda OTP doğrulamasını register endpoint'e bırakıyoruz.
+    // OTP'yi frontend'de saklıyoruz, kullanıcı formu doldurunca register çağrısında gönderilecek.
+    // Böylece OTP tek seferde tüketilir (register endpoint'inde).
+    setStep('register-form');
   };
 
   const handleRegister = async (e: React.FormEvent) => {
@@ -107,31 +105,33 @@ export default function LoginPage() {
     resetAll();
   };
 
+  const inputClass = "w-full bg-surface-container-lowest border-0 focus:ring-2 focus:ring-primary rounded-xl py-3.5 px-4 transition-all text-sm";
+
   return (
     <div className="min-h-[70vh] flex items-center justify-center px-4">
-      <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md border border-gray-100">
+      <div className="bg-surface-container-lowest rounded-4xl shadow-xl p-10 w-full max-w-md border border-outline-variant/10">
         {/* Logo */}
-        <div className="text-center mb-6">
-          <div className="w-16 h-16 rounded-full overflow-hidden mx-auto mb-3 border-2 border-brand-orange-200">
-            <img src="/logo.png" alt="Köylüoğlu Fresh" className="w-full h-full object-cover" />
+        <div className="text-center mb-8">
+          <div className="text-3xl font-bold tracking-tighter text-orange-800 font-headline">
+            Köylüoğlu Market
           </div>
         </div>
 
-        {/* Tab: Giriş Yap / Kayıt Ol */}
+        {/* Tabs */}
         {step === 'phone' && (
-          <div className="flex rounded-xl bg-gray-100 p-1 mb-6">
+          <div className="flex rounded-full bg-surface-container-low p-1 mb-8">
             <button
               onClick={() => switchMode('login')}
-              className={`flex-1 py-2.5 rounded-lg text-sm font-semibold transition ${
-                mode === 'login' ? 'bg-white text-brand-orange-600 shadow-sm' : 'text-gray-500'
+              className={`flex-1 py-2.5 rounded-full text-sm font-bold transition ${
+                mode === 'login' ? 'bg-primary text-white shadow-sm' : 'text-slate-500'
               }`}
             >
               Giriş Yap
             </button>
             <button
               onClick={() => switchMode('register')}
-              className={`flex-1 py-2.5 rounded-lg text-sm font-semibold transition ${
-                mode === 'register' ? 'bg-white text-brand-orange-600 shadow-sm' : 'text-gray-500'
+              className={`flex-1 py-2.5 rounded-full text-sm font-bold transition ${
+                mode === 'register' ? 'bg-primary text-white shadow-sm' : 'text-slate-500'
               }`}
             >
               Kayıt Ol
@@ -139,49 +139,48 @@ export default function LoginPage() {
           </div>
         )}
 
-        {/* Step: Phone */}
+        {/* Phone Step */}
         {step === 'phone' && (
           <form onSubmit={handleSendOtp}>
-            <p className="text-sm text-gray-500 mb-4 text-center">
+            <p className="text-sm text-on-surface-variant mb-6 text-center">
               {mode === 'login'
                 ? 'Kayıtlı telefon numaranızla giriş yapın'
                 : 'Yeni hesap oluşturmak için telefon numaranızı girin'}
             </p>
-            <label className="block text-sm font-semibold text-gray-700 mb-1.5">
-              <FiPhone className="inline mr-1.5" size={14} />
-              Telefon Numarası
+            <label className="block text-sm font-bold text-on-surface-variant mb-2 flex items-center gap-2">
+              <Icon name="phone" size={16} /> Telefon Numarası
             </label>
-            <div className="relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm">+90</span>
+            <div className="relative mb-6">
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-bold">+90</span>
               <input
                 type="tel"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value.replace(/\D/g, '').slice(0, 11))}
                 placeholder="5XX XXX XX XX"
                 maxLength={11}
-                className="w-full border border-gray-200 rounded-xl pl-14 pr-4 py-3.5 mb-4 focus:ring-1 focus:ring-brand-orange-300 focus:border-brand-orange-300 focus:outline-none transition"
+                className="w-full bg-surface-container-low border-0 focus:ring-2 focus:ring-primary rounded-xl pl-14 pr-4 py-3.5 transition-all text-sm"
                 required
               />
             </div>
             <button
               type="submit"
               disabled={loading || phone.length < 10}
-              className="w-full bg-brand-orange-500 text-white py-3.5 rounded-xl font-bold hover:bg-brand-orange-600 disabled:bg-gray-200 disabled:text-gray-400 transition"
+              className="w-full bg-gradient-to-r from-primary to-primary-container text-white py-4 rounded-full font-bold shadow-lg shadow-primary/20 hover:opacity-90 active:scale-95 disabled:from-slate-200 disabled:to-slate-200 disabled:text-slate-400 disabled:shadow-none transition-all"
             >
               {loading ? <Spinner /> : 'Doğrulama Kodu Gönder'}
             </button>
           </form>
         )}
 
-        {/* Step: OTP */}
+        {/* OTP Step */}
         {step === 'otp' && (
           <form onSubmit={mode === 'login' ? handleVerifyLogin : handleVerifyRegister}>
-            <h2 className="text-lg font-bold text-gray-800 text-center mb-1">
+            <h2 className="text-xl font-headline font-bold text-on-surface text-center mb-2">
               {mode === 'login' ? 'Giriş Yap' : 'Kayıt Ol'}
             </h2>
-            <p className="text-sm text-gray-500 mb-4 bg-gray-50 rounded-lg p-3">
-              <FiLock className="inline mr-1.5" size={14} />
-              <strong>{phone}</strong> numarasına gönderilen 6 haneli kodu girin
+            <p className="text-sm text-on-surface-variant mb-6 bg-surface-container-low rounded-xl p-4 flex items-center gap-2">
+              <Icon name="lock" size={16} className="text-primary" />
+              <strong>{phone}</strong> numarasına gönderilen kodu girin
             </p>
             <input
               type="text"
@@ -189,58 +188,56 @@ export default function LoginPage() {
               onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
               placeholder="------"
               maxLength={6}
-              className="w-full border border-gray-200 rounded-xl px-4 py-4 mb-4 text-center text-2xl tracking-[0.5em] font-bold focus:ring-1 focus:ring-brand-orange-300 focus:border-brand-orange-300 focus:outline-none transition"
+              className="w-full bg-surface-container-low border-0 focus:ring-2 focus:ring-primary rounded-xl px-4 py-4 mb-6 text-center text-2xl tracking-[0.5em] font-bold transition-all"
               required
               autoFocus
             />
             <button
               type="submit"
               disabled={loading || otp.length < 6}
-              className="w-full bg-brand-orange-500 text-white py-3.5 rounded-xl font-bold hover:bg-brand-orange-600 disabled:bg-gray-200 disabled:text-gray-400 transition"
+              className="w-full bg-gradient-to-r from-primary to-primary-container text-white py-4 rounded-full font-bold shadow-lg shadow-primary/20 hover:opacity-90 active:scale-95 disabled:from-slate-200 disabled:to-slate-200 disabled:text-slate-400 disabled:shadow-none transition-all"
             >
               {loading ? <Spinner /> : mode === 'login' ? 'Giriş Yap' : 'Devam Et'}
             </button>
             <button
               type="button"
               onClick={() => { setStep('phone'); setOtp(''); }}
-              className="w-full text-gray-400 mt-3 text-sm hover:text-brand-orange-600 transition flex items-center justify-center gap-1"
+              className="w-full text-on-surface-variant mt-3 text-sm hover:text-primary transition flex items-center justify-center gap-1"
             >
-              <FiArrowLeft size={14} /> Geri dön
+              <Icon name="arrow_back" size={14} /> Geri dön
             </button>
           </form>
         )}
 
-        {/* Step: Register Form */}
+        {/* Register Form */}
         {step === 'register-form' && (
           <form onSubmit={handleRegister} className="space-y-4">
-            <h2 className="text-lg font-bold text-gray-800 text-center mb-1">Bilgilerinizi Tamamlayın</h2>
-            <p className="text-sm text-gray-500 text-center mb-2">Teslimat için bilgilerinize ihtiyacımız var</p>
+            <h2 className="text-xl font-headline font-bold text-on-surface text-center mb-1">Bilgilerinizi Tamamlayın</h2>
+            <p className="text-sm text-on-surface-variant text-center mb-4">Teslimat için bilgilerinize ihtiyacımız var</p>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1.5">
-                <FiUser className="inline mr-1.5" size={14} />
-                Ad Soyad *
+              <label className="block text-sm font-bold text-on-surface-variant mb-2 flex items-center gap-2">
+                <Icon name="person" size={16} /> Ad Soyad *
               </label>
               <input
                 type="text"
                 value={registerForm.fullName}
                 onChange={(e) => setRegisterForm({ ...registerForm, fullName: e.target.value })}
                 placeholder="Adınız Soyadınız"
-                className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:ring-1 focus:ring-brand-orange-300 focus:border-brand-orange-300 focus:outline-none transition"
+                className={inputClass}
                 required
                 autoFocus
               />
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1.5">
-                <FiMapPin className="inline mr-1.5" size={14} />
-                Mahalle *
+              <label className="block text-sm font-bold text-on-surface-variant mb-2 flex items-center gap-2">
+                <Icon name="location_on" size={16} /> Mahalle *
               </label>
               <select
                 value={registerForm.district}
                 onChange={(e) => setRegisterForm({ ...registerForm, district: e.target.value })}
-                className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:ring-1 focus:ring-brand-orange-300 focus:border-brand-orange-300 focus:outline-none transition bg-white"
+                className={inputClass}
                 required
               >
                 <option value="">Mahalle seçin</option>
@@ -251,28 +248,27 @@ export default function LoginPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1.5">
-                <FiMapPin className="inline mr-1.5" size={14} />
-                Açık Adres *
+              <label className="block text-sm font-bold text-on-surface-variant mb-2 flex items-center gap-2">
+                <Icon name="home" size={16} /> Açık Adres *
               </label>
               <textarea
                 value={registerForm.fullAddress}
                 onChange={(e) => setRegisterForm({ ...registerForm, fullAddress: e.target.value })}
                 placeholder="Sokak, bina no, daire no..."
                 rows={3}
-                className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:ring-1 focus:ring-brand-orange-300 focus:border-brand-orange-300 focus:outline-none transition resize-none"
+                className={inputClass}
                 required
               />
             </div>
 
-            <div className="bg-brand-orange-50 rounded-lg p-3 text-sm text-brand-orange-700">
-              <strong>📍 Tokat Merkez</strong> — Şu an sadece Tokat Merkez mahallelerine teslimat yapıyoruz.
+            <div className="bg-primary-fixed rounded-xl p-4 text-sm text-on-primary-fixed-variant">
+              <strong>Tokat Merkez</strong> — Şu an sadece Tokat Merkez mahallelerine teslimat yapıyoruz.
             </div>
 
             <button
               type="submit"
               disabled={loading || !registerForm.fullName || !registerForm.district || !registerForm.fullAddress}
-              className="w-full bg-brand-orange-500 text-white py-3.5 rounded-xl font-bold hover:bg-brand-orange-600 disabled:bg-gray-200 disabled:text-gray-400 transition"
+              className="w-full bg-gradient-to-r from-primary to-primary-container text-white py-4 rounded-full font-bold shadow-lg shadow-primary/20 hover:opacity-90 active:scale-95 disabled:from-slate-200 disabled:to-slate-200 disabled:text-slate-400 disabled:shadow-none transition-all"
             >
               {loading ? <Spinner /> : 'Kaydı Tamamla'}
             </button>
@@ -280,17 +276,17 @@ export default function LoginPage() {
             <button
               type="button"
               onClick={() => setStep('otp')}
-              className="w-full text-gray-400 text-sm hover:text-brand-orange-600 transition flex items-center justify-center gap-1"
+              className="w-full text-on-surface-variant text-sm hover:text-primary transition flex items-center justify-center gap-1"
             >
-              <FiArrowLeft size={14} /> Geri dön
+              <Icon name="arrow_back" size={14} /> Geri dön
             </button>
           </form>
         )}
 
-        <p className="text-center text-xs text-gray-400 mt-6">
+        <p className="text-center text-xs text-slate-400 mt-8">
           Giriş yaparak{' '}
-          <a href="/sayfa/kullanim-kosullari" target="_blank" className="text-brand-orange-500 hover:underline">Kullanım Koşullarını</a> ve{' '}
-          <a href="/sayfa/kvkk" target="_blank" className="text-brand-orange-500 hover:underline">KVKK Aydınlatma Metnini</a> kabul etmiş olursunuz.
+          <a href="/sayfa/kullanim-kosullari" target="_blank" className="text-primary hover:underline">Kullanım Koşullarını</a> ve{' '}
+          <a href="/sayfa/kvkk" target="_blank" className="text-primary hover:underline">KVKK Aydınlatma Metnini</a> kabul etmiş olursunuz.
         </p>
       </div>
     </div>
