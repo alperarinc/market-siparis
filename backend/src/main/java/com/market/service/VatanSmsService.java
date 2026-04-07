@@ -2,6 +2,7 @@ package com.market.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import org.springframework.http.*;
@@ -30,8 +31,13 @@ public class VatanSmsService {
     private final RestClient restClient;
 
     public VatanSmsService() {
+        var factory = new SimpleClientHttpRequestFactory();
+        factory.setConnectTimeout(Duration.ofSeconds(10));
+        factory.setReadTimeout(Duration.ofSeconds(15));
+
         this.restClient = RestClient.builder()
                 .baseUrl(VATAN_SMS_URL)
+                .requestFactory(factory)
                 .build();
     }
 
