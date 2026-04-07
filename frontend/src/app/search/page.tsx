@@ -37,7 +37,7 @@ function SearchContent() {
         <div className="w-20 h-20 bg-primary-fixed rounded-full flex items-center justify-center mx-auto mb-4">
           <Icon name="search" className="text-primary text-3xl" />
         </div>
-        <h2 className="text-xl font-headline font-bold text-on-surface">Aradiginiz ürünü yazin</h2>
+        <h2 className="text-xl font-headline font-bold text-on-surface">Aradığınız ürünü yazın</h2>
         <p className="text-sm text-on-surface-variant mt-1">Meyve, sebze, et, süt ürünleri...</p>
       </div>
     );
@@ -47,7 +47,7 @@ function SearchContent() {
     <div>
       <div className="mb-10">
         <h1 className="text-4xl font-headline font-black tracking-tight text-on-surface mb-2">
-          &ldquo;{query}&rdquo; icin sonuclar
+          &ldquo;{query}&rdquo; için sonuçlar
         </h1>
         <p className="text-slate-500">{products.length > 0 ? `${products.length} ürün bulundu` : ''}</p>
       </div>
@@ -59,8 +59,8 @@ function SearchContent() {
       ) : products.length === 0 ? (
         <div className="text-center py-20 bg-surface-container-lowest rounded-4xl">
           <Icon name="search_off" className="text-slate-300 text-6xl mb-4" />
-          <h2 className="text-xl font-headline font-bold text-on-surface mb-2">Sonuc bulunamadi</h2>
-          <p className="text-on-surface-variant text-sm">Farkli bir arama terimi deneyin</p>
+          <h2 className="text-xl font-headline font-bold text-on-surface mb-2">Sonuç bulunamadı</h2>
+          <p className="text-on-surface-variant text-sm">Farklı bir arama terimi deneyin</p>
         </div>
       ) : (
         <>

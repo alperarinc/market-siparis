@@ -33,23 +33,23 @@ export default async function HomePage() {
               </span>
               <h1 className="font-headline text-4xl md:text-6xl font-black tracking-tight text-on-surface leading-[1.1]">
                 Yerel Tarlalardan <br />
-                <span className="text-primary-container">Mutfaginiza.</span>
+                <span className="text-primary-container">Mutfağınıza.</span>
               </h1>
               <p className="text-on-surface-variant text-lg max-w-lg leading-relaxed">
-                Akdeniz'in en taze lezzetlerini kesfeden. El yapimi, organik ürünler 24 saat icinde kapinizda.
+                Akdeniz'in en taze lezzetlerini keşfedin. El yapımı, organik ürünler 24 saat içinde kapınızda.
               </p>
               <div className="flex flex-wrap gap-4 pt-4">
                 <Link
                   href="/products"
                   className="px-10 py-4 bg-gradient-to-br from-primary to-primary-container text-white rounded-full font-semibold shadow-lg shadow-primary/20 hover:scale-105 transition-transform"
                 >
-                  Simdi Alisveris Yap
+                  Şimdi Alışveriş Yap
                 </Link>
                 <Link
                   href="/products"
                   className="px-10 py-4 bg-surface-container-highest text-on-surface rounded-full font-semibold hover:bg-surface-container-high transition-colors"
                 >
-                  Kategorileri Kesfet
+                  Kategorileri Keşfet
                 </Link>
               </div>
             </div>
@@ -65,7 +65,7 @@ export default async function HomePage() {
             <span className="material-symbols-outlined">local_shipping</span>
           </div>
           <div>
-            <p className="font-headline font-bold text-on-surface">Ayni Gün Teslimat</p>
+            <p className="font-headline font-bold text-on-surface">Aynı Gün Teslimat</p>
             <p className="text-sm text-on-surface-variant">
               {settings?.free_delivery_min || '200'} TL üstü ücretsiz
             </p>
@@ -77,7 +77,7 @@ export default async function HomePage() {
           </div>
           <div>
             <p className="font-headline font-bold text-on-surface">Kalite Garantisi</p>
-            <p className="text-sm text-on-surface-variant">Sertifikali organik ürünler</p>
+            <p className="text-sm text-on-surface-variant">Sertifikalı organik ürünler</p>
           </div>
         </div>
         <div className="flex items-center gap-4 p-6 bg-surface-container-lowest rounded-4xl">
@@ -86,7 +86,7 @@ export default async function HomePage() {
           </div>
           <div>
             <p className="font-headline font-bold text-on-surface">Sürdürülebilir Tedarik</p>
-            <p className="text-sm text-on-surface-variant">40+ yerel üreticiyle ortaklik</p>
+            <p className="text-sm text-on-surface-variant">40+ yerel üreticiyle ortaklık</p>
           </div>
         </div>
       </section>
@@ -97,7 +97,7 @@ export default async function HomePage() {
           <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div>
               <h2 className="font-headline text-3xl font-bold text-on-surface mb-2">Kategoriler</h2>
-              <p className="text-on-surface-variant">En iyi yerel üreticilerden özenle secilmis ürünler</p>
+              <p className="text-on-surface-variant">En iyi yerel üreticilerden özenle seçilmiş ürünler</p>
             </div>
             <Link href="/products" className="text-primary font-semibold flex items-center gap-2 group">
               Tüm Kategorileri Gör
@@ -125,7 +125,7 @@ export default async function HomePage() {
           <div className="flex items-end justify-between mb-10">
             <div>
               <h2 className="font-headline text-3xl font-bold text-on-surface mb-2">Yerel Favoriler</h2>
-              <p className="text-on-surface-variant">Müsterilerimizin en cok tercih ettigi ürünler</p>
+              <p className="text-on-surface-variant">Müşterilerimizin en çok tercih ettiği ürünler</p>
             </div>
             <Link href="/products" className="text-primary font-semibold flex items-center gap-2 group">
               Tümünü Gör
@@ -144,13 +144,13 @@ export default async function HomePage() {
       <section className="relative bg-primary-container rounded-4xl overflow-hidden p-10 md:p-16 flex flex-col justify-end min-h-[300px]">
         <div className="relative z-10">
           <span className="inline-block px-4 py-1 rounded-full bg-white/20 text-white text-[10px] font-black uppercase tracking-widest mb-4">
-            Ilk Siparise Özel
+            İlk Siparişe Özel
           </span>
           <h2 className="font-headline font-black text-3xl md:text-4xl text-white leading-tight mb-4">
             Hemen Üye Ol,<br />Ücretsiz Teslimat Kazan
           </h2>
           <p className="text-white/80 text-sm font-medium mb-8 max-w-md">
-            Ilk siparisinde ücretsiz teslimat firsatini yakala. Taze ürünler kapinda.
+            İlk siparişinde ücretsiz teslimat fırsatını yakala. Taze ürünler kapında.
           </p>
           <Link
             href="/login"

@@ -19,8 +19,8 @@ export default function CartPage() {
         <div className="w-20 h-20 bg-surface-container-low rounded-full flex items-center justify-center mx-auto mb-4">
           <Icon name="shopping_bag" className="text-slate-400 text-3xl" />
         </div>
-        <h2 className="text-2xl font-headline font-bold text-on-surface mb-2">Sepetiniz Bos</h2>
-        <p className="text-slate-500 mb-6">Hadi alisverise baslayalim!</p>
+        <h2 className="text-2xl font-headline font-bold text-on-surface mb-2">Sepetiniz Boş</h2>
+        <p className="text-slate-500 mb-6">Hadi alışverişe başlayalım!</p>
         <Link href="/products" className="btn-primary inline-block">
           Ürünlere Göz At
         </Link>
@@ -32,7 +32,7 @@ export default function CartPage() {
     <div>
       <div className="mb-10">
         <h1 className="text-4xl font-headline font-extrabold tracking-tight text-on-surface mb-2">Sepetim</h1>
-        <p className="text-slate-500">Taze ve dogal ürünler kapiniza gelmeye hazir.</p>
+        <p className="text-slate-500">Taze ve doğal ürünler kapınıza gelmeye hazır.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
@@ -42,7 +42,7 @@ export default function CartPage() {
             <div className="bg-secondary-container/20 p-4 rounded-xl flex items-start gap-3">
               <Icon name="info" className="text-secondary" />
               <p className="text-xs text-on-secondary-container leading-relaxed">
-                Ücretsiz teslimat icin <strong>{formatPrice(freeDeliveryRemaining)} TL</strong> daha ekleyin!
+                Ücretsiz teslimat için <strong>{formatPrice(freeDeliveryRemaining)} TL</strong> daha ekleyin!
               </p>
             </div>
           )}
@@ -50,7 +50,7 @@ export default function CartPage() {
             <div className="bg-secondary-container/20 p-4 rounded-xl flex items-start gap-3">
               <Icon name="info" className="text-secondary" />
               <p className="text-xs text-on-secondary-container leading-relaxed">
-                Tebrikler! Ücretsiz teslimat hakki kazandiniz. <strong>Harika secim!</strong>
+                Tebrikler! Ücretsiz teslimat hakkı kazandınız. <strong>Harika seçim!</strong>
               </p>
             </div>
           )}
@@ -106,7 +106,7 @@ export default function CartPage() {
         {/* Order Summary */}
         <aside className="lg:col-span-4 sticky top-28">
           <div className="bg-surface-container-low rounded-xl p-8 space-y-6">
-            <h2 className="text-2xl font-headline font-bold tracking-tight mb-4">Siparis Özeti</h2>
+            <h2 className="text-2xl font-headline font-bold tracking-tight mb-4">Sipariş Özeti</h2>
             <div className="space-y-4 text-sm">
               <div className="flex justify-between items-center text-slate-600">
                 <span>Ara Toplam</span>
@@ -133,7 +133,7 @@ export default function CartPage() {
                 href="/checkout"
                 className="w-full bg-gradient-to-r from-primary to-primary-container text-white font-bold py-4 rounded-full text-lg shadow-lg hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-3"
               >
-                Alisverisi Tamamla
+                Alışverişi Tamamla
                 <Icon name="arrow_forward" />
               </Link>
             ) : (
@@ -141,7 +141,7 @@ export default function CartPage() {
                 href="/login"
                 className="w-full bg-gradient-to-r from-primary to-primary-container text-white font-bold py-4 rounded-full text-lg shadow-lg hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-3"
               >
-                Satin Almak Icin Giris Yap
+                Satın Almak İçin Giriş Yap
                 <Icon name="arrow_forward" />
               </Link>
             )}
@@ -149,7 +149,7 @@ export default function CartPage() {
             <div className="flex justify-center gap-4 pt-4">
               <Icon name="lock" className="text-slate-400 text-xl" />
               <p className="text-[10px] text-slate-400 text-center max-w-[200px]">
-                Güvenli ödeme altyapisi ile bilgileriniz 256-bit SSL korumasi altindadir.
+                Güvenli ödeme altyapısı ile bilgileriniz 256-bit SSL koruması altındadır.
               </p>
             </div>
           </div>

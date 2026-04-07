@@ -17,8 +17,8 @@ export default function ProfilePage() {
         <div className="w-20 h-20 bg-primary-fixed rounded-full flex items-center justify-center mx-auto mb-4">
           <Icon name="person" className="text-primary text-3xl" />
         </div>
-        <p className="text-xl text-slate-500 mb-4">Profil sayfasi icin giris yapin</p>
-        <Link href="/login" className="btn-primary inline-block">Giris Yap</Link>
+        <p className="text-xl text-slate-500 mb-4">Profil sayfası için giriş yapın</p>
+        <Link href="/login" className="btn-primary inline-block">Giriş Yap</Link>
       </div>
     );
   }
@@ -28,7 +28,7 @@ export default function ProfilePage() {
       await apiLogout();
     } catch {}
     clearAuth();
-    toast.success('Cikis yapildi');
+    toast.success('Çıkış yapıldı');
     router.push('/');
   };
 
@@ -44,7 +44,7 @@ export default function ProfilePage() {
               </span>
             </div>
             <div>
-              <h2 className="font-headline font-bold text-lg text-on-surface">{user.fullName || 'Kullanici'}</h2>
+              <h2 className="font-headline font-bold text-lg text-on-surface">{user.fullName || 'Kullanıcı'}</h2>
               <p className="text-xs font-label uppercase tracking-widest text-slate-500">{user.phone}</p>
             </div>
           </div>
@@ -52,7 +52,7 @@ export default function ProfilePage() {
           <nav className="space-y-1">
             <Link href="/orders" className="flex items-center gap-3 px-4 py-3.5 rounded-xl bg-primary-container text-on-primary-container font-bold shadow-sm transition-all">
               <Icon name="receipt_long" />
-              <span className="font-label">Siparislerim</span>
+              <span className="font-label">Siparişlerim</span>
             </Link>
             <Link href="/checkout" className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-slate-600 hover:bg-white/50 transition-colors">
               <Icon name="location_on" />
@@ -84,8 +84,8 @@ export default function ProfilePage() {
       {/* Main Content */}
       <section className="flex-grow">
         <div className="mb-10">
-          <h1 className="text-4xl font-headline font-black tracking-tighter text-on-surface mb-2">Hesabim</h1>
-          <p className="text-slate-500 font-body">Hesap bilgilerinizi ve siparislerinizi yönetin.</p>
+          <h1 className="text-4xl font-headline font-black tracking-tighter text-on-surface mb-2">Hesabım</h1>
+          <p className="text-slate-500 font-body">Hesap bilgilerinizi ve siparişlerinizi yönetin.</p>
         </div>
 
         {/* Quick Actions */}
@@ -96,8 +96,8 @@ export default function ProfilePage() {
                 <Icon name="local_shipping" size={28} />
               </div>
               <div className="flex-grow">
-                <h3 className="font-headline font-bold text-lg mb-1">Siparislerim</h3>
-                <p className="text-sm text-slate-500">Tüm gecmis ve aktif siparislerinizi buradan takip edebilirsiniz.</p>
+                <h3 className="font-headline font-bold text-lg mb-1">Siparişlerim</h3>
+                <p className="text-sm text-slate-500">Tüm geçmiş ve aktif siparişlerinizi buradan takip edebilirsiniz.</p>
               </div>
               <Icon name="arrow_forward" className="text-slate-400" />
             </div>
@@ -109,8 +109,8 @@ export default function ProfilePage() {
                 <Icon name="shopping_basket" size={28} />
               </div>
               <div className="flex-grow">
-                <h3 className="font-headline font-bold text-lg mb-1">Alisverise Devam Et</h3>
-                <p className="text-sm text-slate-500">Taze ürünlerimize göz atin.</p>
+                <h3 className="font-headline font-bold text-lg mb-1">Alışverişe Devam Et</h3>
+                <p className="text-sm text-slate-500">Taze ürünlerimize göz atın.</p>
               </div>
               <Icon name="arrow_forward" className="text-slate-400" />
             </div>
@@ -124,10 +124,10 @@ export default function ProfilePage() {
               <Icon name="support_agent" size={28} />
             </div>
             <div>
-              <h3 className="font-headline font-bold text-lg mb-1">Yardima mi ihtiyaciniz var?</h3>
-              <p className="text-sm text-slate-500 mb-3">Siparisinizle ilgili bir sorun mu yasiyorsunuz?</p>
+              <h3 className="font-headline font-bold text-lg mb-1">Yardıma mı ihtiyacınız var?</h3>
+              <p className="text-sm text-slate-500 mb-3">Siparişinizle ilgili bir sorun mu yaşıyorsunuz?</p>
               <Link href="/sayfa/iletisim" className="text-secondary font-bold text-sm flex items-center gap-1 hover:underline">
-                Iletisim <Icon name="arrow_forward" size={14} />
+                İletişim <Icon name="arrow_forward" size={14} />
               </Link>
             </div>
           </div>
@@ -136,10 +136,10 @@ export default function ProfilePage() {
               <Icon name="star_rate" filled size={28} />
             </div>
             <div>
-              <h3 className="font-headline font-bold text-lg mb-1">Deneyiminizi Paylasin</h3>
-              <p className="text-sm text-slate-500 mb-3">Geri bildiriminiz bizim icin önemli.</p>
+              <h3 className="font-headline font-bold text-lg mb-1">Deneyiminizi Paylaşın</h3>
+              <p className="text-sm text-slate-500 mb-3">Geri bildiriminiz bizim için önemli.</p>
               <Link href="/sayfa/iletisim" className="text-primary font-bold text-sm flex items-center gap-1 hover:underline">
-                Görüs Bildirin <Icon name="arrow_forward" size={14} />
+                Görüş Bildirin <Icon name="arrow_forward" size={14} />
               </Link>
             </div>
           </div>

@@ -19,12 +19,12 @@ const STATUS_FLOW = [
 
 const statusInfo: Record<string, { label: string; bgClass: string; textClass: string; icon: string }> = {
   PENDING: { label: 'Onay Bekleniyor', bgClass: 'bg-amber-50', textClass: 'text-amber-700', icon: 'schedule' },
-  CONFIRMED: { label: 'Onaylandi', bgClass: 'bg-blue-50', textClass: 'text-blue-700', icon: 'check_circle' },
-  PREPARING: { label: 'Hazirlaniyor', bgClass: 'bg-indigo-50', textClass: 'text-indigo-700', icon: 'restaurant' },
-  READY: { label: 'Hazir', bgClass: 'bg-purple-50', textClass: 'text-purple-700', icon: 'inventory_2' },
+  CONFIRMED: { label: 'Onaylandı', bgClass: 'bg-blue-50', textClass: 'text-blue-700', icon: 'check_circle' },
+  PREPARING: { label: 'Hazırlanıyor', bgClass: 'bg-indigo-50', textClass: 'text-indigo-700', icon: 'restaurant' },
+  READY: { label: 'Hazır', bgClass: 'bg-purple-50', textClass: 'text-purple-700', icon: 'inventory_2' },
   OUT_FOR_DELIVERY: { label: 'Kurye Yolda', bgClass: 'bg-orange-100', textClass: 'text-orange-800', icon: 'local_shipping' },
   DELIVERED: { label: 'Teslim Edildi', bgClass: 'bg-secondary-container/30', textClass: 'text-secondary', icon: 'check_circle' },
-  CANCELLED: { label: 'Iptal Edildi', bgClass: 'bg-error-container', textClass: 'text-error', icon: 'cancel' },
+  CANCELLED: { label: 'İptal Edildi', bgClass: 'bg-error-container', textClass: 'text-error', icon: 'cancel' },
 };
 
 export default function OrdersPage() {
@@ -43,10 +43,10 @@ export default function OrdersPage() {
   }, [isAuthenticated]);
 
   const handleCancel = async (orderId: number) => {
-    if (!confirm('Siparisi iptal etmek istediginize emin misiniz?')) return;
+    if (!confirm('Siparişi iptal etmek istediğinize emin misiniz?')) return;
     try {
       await cancelOrder(orderId);
-      toast.success('Siparis iptal edildi');
+      toast.success('Sipariş iptal edildi');
       setOrders((prev) => prev.map((o) => o.id === orderId ? { ...o, status: 'CANCELLED' } : o));
     } catch (err: any) {
       toast.error(err.message);
@@ -57,8 +57,8 @@ export default function OrdersPage() {
     return (
       <div className="text-center py-20">
         <Icon name="receipt_long" className="text-slate-300 text-6xl mb-4" />
-        <p className="text-slate-600 font-headline font-bold mb-4">Siparislerinizi görmek icin giris yapin</p>
-        <Link href="/login" className="btn-primary inline-block">Giris Yap</Link>
+        <p className="text-slate-600 font-headline font-bold mb-4">Siparişlerinizi görmek için giriş yapın</p>
+        <Link href="/login" className="btn-primary inline-block">Giriş Yap</Link>
       </div>
     );
   }
@@ -75,8 +75,8 @@ export default function OrdersPage() {
     return (
       <div className="text-center py-20">
         <Icon name="receipt_long" className="text-slate-300 text-6xl mb-4" />
-        <h2 className="text-2xl font-headline font-bold text-on-surface mb-2">Henüz siparisiniz yok</h2>
-        <p className="text-slate-500 mb-6">Alisverise baslayarak ilk siparisinizi olusturun!</p>
+        <h2 className="text-2xl font-headline font-bold text-on-surface mb-2">Henüz siparişiniz yok</h2>
+        <p className="text-slate-500 mb-6">Alışverişe başlayarak ilk siparişinizi oluşturun!</p>
         <Link href="/products" className="btn-primary inline-block">Ürünlere Göz At</Link>
       </div>
     );
@@ -90,8 +90,8 @@ export default function OrdersPage() {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="mb-10">
-        <h1 className="text-4xl font-headline font-black tracking-tighter text-on-surface mb-2">Siparislerim</h1>
-        <p className="text-slate-500 font-body">Tüm gecmis ve aktif siparislerinizi buradan takip edebilirsiniz.</p>
+        <h1 className="text-4xl font-headline font-black tracking-tighter text-on-surface mb-2">Siparişlerim</h1>
+        <p className="text-slate-500 font-body">Tüm geçmiş ve aktif siparişlerinizi buradan takip edebilirsiniz.</p>
       </div>
 
       {/* Filter Chips */}
@@ -100,7 +100,7 @@ export default function OrdersPage() {
           { key: 'all', label: 'Tümü' },
           { key: 'active', label: 'Devam Edenler' },
           { key: 'delivered', label: 'Tamamlananlar' },
-          { key: 'cancelled', label: 'Iptal Edilenler' },
+          { key: 'cancelled', label: 'İptal Edilenler' },
         ].map((f) => (
           <button
             key={f.key}
@@ -226,7 +226,7 @@ export default function OrdersPage() {
                       onClick={() => handleCancel(order.id)}
                       className="mt-4 w-full py-3 rounded-full border-2 border-error text-error text-sm font-bold hover:bg-error/5 transition"
                     >
-                      Siparisi Iptal Et
+                      Siparişi İptal Et
                     </button>
                   )}
                 </div>

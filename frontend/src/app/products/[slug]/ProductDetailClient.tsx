@@ -54,7 +54,7 @@ export default function ProductDetailClient({ product }: { product: any }) {
             )}
             {discountPercent > 0 && (
               <div className="absolute top-4 left-4 bg-error text-white px-3 py-1 rounded-full text-xs font-bold">
-                %{discountPercent} Indirim
+                %{discountPercent} İndirim
               </div>
             )}
             {product.categoryName && (
@@ -108,7 +108,7 @@ export default function ProductDetailClient({ product }: { product: any }) {
                 <div className="flex items-center gap-2">
                   <span className={`inline-flex items-center gap-1 text-sm font-medium ${remaining <= 5 ? 'text-error' : 'text-secondary'}`}>
                     <span className={`w-2 h-2 rounded-full ${remaining <= 5 ? 'bg-error' : 'bg-secondary'}`} />
-                    {remaining <= 0 ? 'Sepette maksimuma ulasildi' : remaining <= 5 ? `Son ${remaining} ${product.unit} kaldi` : `Stokta: ${product.stockQuantity} ${product.unit}`}
+                    {remaining <= 0 ? 'Sepette maksimuma ulaşıldı' : remaining <= 5 ? `Son ${remaining} ${product.unit} kaldı` : `Stokta: ${product.stockQuantity} ${product.unit}`}
                   </span>
                   {cartQty > 0 && <span className="text-xs text-slate-400">(Sepette: {cartQty})</span>}
                 </div>
@@ -153,7 +153,7 @@ export default function ProductDetailClient({ product }: { product: any }) {
             {/* Description */}
             {product.description && (
               <div className="space-y-4">
-                <h3 className="text-lg font-headline font-bold border-b border-surface-container-high pb-2">Ürün Hikayesi</h3>
+                <h3 className="text-lg font-headline font-bold border-b border-surface-container-high pb-2">Ürün Hikâyesi</h3>
                 <p className="text-on-surface-variant leading-relaxed">{product.description}</p>
               </div>
             )}
@@ -170,8 +170,8 @@ export default function ProductDetailClient({ product }: { product: any }) {
               <div className="flex items-center gap-3 p-4 bg-surface-container-lowest rounded-xl border border-surface-container-high">
                 <Icon name="local_shipping" className="text-primary" />
                 <div className="text-xs">
-                  <p className="font-bold">Hizli Teslimat</p>
-                  <p className="text-on-surface-variant">24 Saatte Kapinda</p>
+                  <p className="font-bold">Hızlı Teslimat</p>
+                  <p className="text-on-surface-variant">24 Saatte Kapında</p>
                 </div>
               </div>
             </div>
@@ -180,7 +180,7 @@ export default function ProductDetailClient({ product }: { product: any }) {
             <div className="space-y-3">
               {product.weightInfo && (
                 <div className="flex justify-between items-center border-b border-surface-variant pb-2 text-sm">
-                  <span className="text-on-surface-variant">Agirlik</span>
+                  <span className="text-on-surface-variant">Ağırlık</span>
                   <span className="font-bold">{product.weightInfo}</span>
                 </div>
               )}
@@ -198,7 +198,7 @@ export default function ProductDetailClient({ product }: { product: any }) {
               )}
               {product.vatRate != null && (
                 <div className="flex justify-between items-center border-b border-surface-variant pb-2 text-sm">
-                  <span className="text-on-surface-variant">KDV Orani</span>
+                  <span className="text-on-surface-variant">KDV Oranı</span>
                   <span className="font-bold">%{product.vatRate}</span>
                 </div>
               )}
@@ -206,7 +206,7 @@ export default function ProductDetailClient({ product }: { product: any }) {
 
             {product.storageConditions && (
               <div className="bg-surface-container-low p-4 rounded-xl">
-                <h4 className="font-bold text-sm mb-1">Saklama Kosullari</h4>
+                <h4 className="font-bold text-sm mb-1">Saklama Koşulları</h4>
                 <p className="text-sm text-on-surface-variant">{product.storageConditions}</p>
               </div>
             )}

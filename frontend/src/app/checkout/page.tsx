@@ -43,8 +43,8 @@ export default function CheckoutPage() {
   if (!isAuthenticated) {
     return (
       <div className="text-center py-20">
-        <p className="text-xl text-slate-500 mb-4">Siparis vermek icin giris yapin</p>
-        <Link href="/login" className="btn-primary inline-block">Giris Yap</Link>
+        <p className="text-xl text-slate-500 mb-4">Sipariş vermek için giriş yapın</p>
+        <Link href="/login" className="btn-primary inline-block">Giriş Yap</Link>
       </div>
     );
   }
@@ -53,15 +53,15 @@ export default function CheckoutPage() {
     return (
       <div className="text-center py-20">
         <Icon name="shopping_cart" className="text-slate-300 text-6xl mb-4" />
-        <h2 className="text-xl font-headline font-bold text-on-surface mb-4">Sepetiniz bos</h2>
-        <Link href="/" className="btn-primary inline-block">Alisverise Basla</Link>
+        <h2 className="text-xl font-headline font-bold text-on-surface mb-4">Sepetiniz boş</h2>
+        <Link href="/" className="btn-primary inline-block">Alışverişe Başla</Link>
       </div>
     );
   }
 
   const handleSaveAddress = async () => {
     if (!address.fullAddress.trim()) {
-      toast.error('Adres alani zorunludur');
+      toast.error('Adres alanı zorunludur');
       return;
     }
     try {
@@ -132,16 +132,16 @@ export default function CheckoutPage() {
               <h2 className="text-2xl font-headline font-bold text-on-surface tracking-tight mb-6">Teslimat Adresi</h2>
               <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="block text-sm font-medium text-on-surface-variant">Il</label>
-                  <input type="text" value={address.city} onChange={(e) => setAddress({...address, city: e.target.value})} placeholder="Istanbul" className={inputClass} />
+                  <label className="block text-sm font-medium text-on-surface-variant">İl</label>
+                  <input type="text" value={address.city} onChange={(e) => setAddress({...address, city: e.target.value})} placeholder="İstanbul" className={inputClass} />
                 </div>
                 <div className="space-y-2">
-                  <label className="block text-sm font-medium text-on-surface-variant">Ilce</label>
-                  <input type="text" value={address.district} onChange={(e) => setAddress({...address, district: e.target.value})} placeholder="Kadiköy" className={inputClass} />
+                  <label className="block text-sm font-medium text-on-surface-variant">İlçe</label>
+                  <input type="text" value={address.district} onChange={(e) => setAddress({...address, district: e.target.value})} placeholder="Kadıköy" className={inputClass} />
                 </div>
                 <div className="md:col-span-2 space-y-2">
-                  <label className="block text-sm font-medium text-on-surface-variant">Adres Basligi</label>
-                  <input type="text" value={address.title} onChange={(e) => setAddress({...address, title: e.target.value})} placeholder="Ev, Is vb." className={inputClass} />
+                  <label className="block text-sm font-medium text-on-surface-variant">Adres Başlığı</label>
+                  <input type="text" value={address.title} onChange={(e) => setAddress({...address, title: e.target.value})} placeholder="Ev, İş vb." className={inputClass} />
                 </div>
                 <div className="md:col-span-2 space-y-2">
                   <label className="block text-sm font-medium text-on-surface-variant">Tam Adres *</label>
@@ -165,7 +165,7 @@ export default function CheckoutPage() {
           {/* Payment Step */}
           {step === 'payment' && (
             <section className="bg-surface-container-low rounded-xl p-8 space-y-6">
-              <h2 className="text-2xl font-headline font-bold text-on-surface tracking-tight mb-6">Ödeme Secenekleri</h2>
+              <h2 className="text-2xl font-headline font-bold text-on-surface tracking-tight mb-6">Ödeme Seçenekleri</h2>
               <div className="space-y-4">
                 <div
                   onClick={() => setPaymentMethod('CASH_ON_DELIVERY')}
@@ -175,8 +175,8 @@ export default function CheckoutPage() {
                 >
                   <Icon name="local_shipping" className={paymentMethod === 'CASH_ON_DELIVERY' ? 'text-primary mr-4' : 'text-on-surface-variant mr-4'} />
                   <div className="flex-grow">
-                    <p className="font-bold text-on-surface">Kapida Ödeme</p>
-                    <p className="text-xs text-on-surface-variant">Nakit veya kart ile kapida ödeme</p>
+                    <p className="font-bold text-on-surface">Kapıda Ödeme</p>
+                    <p className="text-xs text-on-surface-variant">Nakit veya kart ile kapıda ödeme</p>
                   </div>
                   {paymentMethod === 'CASH_ON_DELIVERY' && <Icon name="check_circle" className="text-primary" />}
                 </div>
@@ -190,15 +190,15 @@ export default function CheckoutPage() {
                   <Icon name="credit_card" className={paymentMethod === 'CREDIT_CARD' ? 'text-primary mr-4' : 'text-on-surface-variant mr-4'} />
                   <div className="flex-grow">
                     <p className="font-bold text-on-surface">Online Ödeme</p>
-                    <p className="text-xs text-on-surface-variant">Kredi/banka karti (Yakinda)</p>
+                    <p className="text-xs text-on-surface-variant">Kredi/banka kartı (Yakında)</p>
                   </div>
                   {paymentMethod === 'CREDIT_CARD' && <Icon name="check_circle" className="text-primary" />}
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-on-surface-variant mb-2">Siparis Notu (Opsiyonel)</label>
-                <textarea value={note} onChange={(e) => setNote(e.target.value)} placeholder="Kapiyi calmayin, meyveleri az olgun secin vb." rows={2} className={inputClass} />
+                <label className="block text-sm font-semibold text-on-surface-variant mb-2">Sipariş Notu (Opsiyonel)</label>
+                <textarea value={note} onChange={(e) => setNote(e.target.value)} placeholder="Kapıyı çalmayın, meyveleri az olgun seçin vb." rows={2} className={inputClass} />
               </div>
 
               <div className="flex gap-3">
@@ -215,7 +215,7 @@ export default function CheckoutPage() {
           {/* Confirm Step */}
           {step === 'confirm' && (
             <section className="bg-surface-container-low rounded-xl p-8 space-y-6">
-              <h2 className="text-2xl font-headline font-bold text-on-surface tracking-tight mb-6">Siparis Onayi</h2>
+              <h2 className="text-2xl font-headline font-bold text-on-surface tracking-tight mb-6">Sipariş Onayı</h2>
               <div className="space-y-3 mb-4">
                 {cartItems.map((item) => (
                   <div key={item.productId} className="flex justify-between items-center py-3 border-b border-surface-variant last:border-0">
@@ -228,8 +228,8 @@ export default function CheckoutPage() {
                 ))}
               </div>
               <div className="bg-surface-container-lowest rounded-xl p-4 text-sm space-y-1.5">
-                <p><strong className="text-on-surface-variant">Adres:</strong> {address.fullAddress}, {address.district}/{address.city}</p>
-                <p><strong className="text-on-surface-variant">Ödeme:</strong> {paymentMethod === 'CASH_ON_DELIVERY' ? 'Kapida Ödeme' : 'Online Ödeme'}</p>
+                <p><strong className="text-on-surface-variant">📍 Adres:</strong> {address.fullAddress}, {address.district}/{address.city}</p>
+                <p><strong className="text-on-surface-variant">Ödeme:</strong> {paymentMethod === 'CASH_ON_DELIVERY' ? 'Kapıda Ödeme' : 'Online Ödeme'}</p>
                 {note && <p><strong className="text-on-surface-variant">Not:</strong> {note}</p>}
               </div>
               <div className="flex gap-3">
@@ -244,7 +244,7 @@ export default function CheckoutPage() {
                   {loading ? (
                     <span className="flex items-center gap-2">
                       <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      Isleniyor...
+                      İşleniyor...
                     </span>
                   ) : (
                     <>
@@ -262,7 +262,7 @@ export default function CheckoutPage() {
         <div className="lg:col-span-4">
           <aside className="sticky top-24">
             <div className="bg-surface-container-lowest rounded-xl shadow-lg shadow-on-surface/5 p-8 border border-outline-variant/10">
-              <h3 className="text-xl font-headline font-bold mb-6">Siparis Özeti</h3>
+              <h3 className="text-xl font-headline font-bold mb-6">Sipariş Özeti</h3>
               <div className="space-y-4 mb-8">
                 <div className="flex items-center justify-between text-on-surface-variant text-sm">
                   <span>Ürünler ({cartItems.length})</span>

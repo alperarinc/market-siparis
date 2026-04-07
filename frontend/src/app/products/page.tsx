@@ -114,8 +114,8 @@ function ProductsContent() {
         ) : products.length === 0 ? (
           <div className="text-center py-20">
             <Icon name="inventory_2" className="text-slate-300 text-6xl mb-4" />
-            <p className="font-headline font-bold text-slate-600">Bu kategoride ürün bulunamadi</p>
-            <p className="text-sm text-slate-400 mt-1">Baska bir kategori secmeyi deneyin</p>
+            <p className="font-headline font-bold text-slate-600">Bu kategoride ürün bulunamadı</p>
+            <p className="text-sm text-slate-400 mt-1">Başka bir kategori seçmeyi deneyin</p>
           </div>
         ) : (
           <>
