@@ -1,12 +1,14 @@
 package com.market.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClient;
-import org.springframework.http.*;
 
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.util.*;
 
@@ -28,16 +30,13 @@ public class VatanSmsService {
     @Value("${sms.provider:log}")
     private String smsProvider;
 
-    private final RestClient restClient;
+    private final HttpClient httpClient;
+    private final ObjectMapper objectMapper;
 
-    public VatanSmsService() {
-        var factory = new SimpleClientHttpRequestFactory();
-        factory.setConnectTimeout(Duration.ofSeconds(10));
-        factory.setReadTimeout(Duration.ofSeconds(15));
-
-        this.restClient = RestClient.builder()
-                .baseUrl(VATAN_SMS_URL)
-                .requestFactory(factory)
+    public VatanSmsService(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+        this.httpClient = HttpClient.newBuilder()
+                .connectTimeout(Duration.ofSeconds(10))
                 .build();
     }
 
@@ -63,17 +62,22 @@ public class VatanSmsService {
                     "message", message
             )));
 
-            var response = restClient.post()
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .body(payload)
-                    .retrieve()
-                    .toEntity(String.class);
+            String body = objectMapper.writeValueAsString(payload);
 
-            if (response.getStatusCode().is2xxSuccessful()) {
-                log.info("Vatan SMS gönderildi: {} -> {}", normalizedPhone, response.getBody());
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(VATAN_SMS_URL))
+                    .timeout(Duration.ofSeconds(15))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body))
+                    .build();
+
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() >= 200 && response.statusCode() < 300) {
+                log.info("Vatan SMS gönderildi: {} -> {}", normalizedPhone, response.body());
                 return true;
             } else {
-                log.error("Vatan SMS hata: {} -> {}", normalizedPhone, response.getBody());
+                log.error("Vatan SMS hata: {} -> status={} body={}", normalizedPhone, response.statusCode(), response.body());
                 return false;
             }
         } catch (Exception e) {
@@ -105,23 +109,25 @@ public class VatanSmsService {
             payload.put("message_content_type", "bilgi");
             payload.put("phones", phones);
 
-            var response = restClient.post()
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .body(payload)
-                    .retrieve()
-                    .toEntity(String.class);
+            String body = objectMapper.writeValueAsString(payload);
 
-            log.info("Vatan SMS toplu gönderim: {} adet -> {}", phones.size(), response.getBody());
-            return response.getStatusCode().is2xxSuccessful();
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(VATAN_SMS_URL))
+                    .timeout(Duration.ofSeconds(15))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body))
+                    .build();
+
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+            log.info("Vatan SMS toplu gönderim: {} adet -> status={} body={}", phones.size(), response.statusCode(), response.body());
+            return response.statusCode() >= 200 && response.statusCode() < 300;
         } catch (Exception e) {
             log.error("Vatan SMS toplu gönderim hatası", e);
             return false;
         }
     }
 
-    /**
-     * Telefon numarasını 5XXXXXXXXX formatına normalize eder.
-     */
     private String normalizePhone(String phone) {
         if (phone == null) return "";
         String cleaned = phone.replaceAll("[\\s\\-\\(\\)\\+]", "");
