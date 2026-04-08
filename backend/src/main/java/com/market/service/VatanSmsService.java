@@ -31,10 +31,9 @@ public class VatanSmsService {
     private String smsProvider;
 
     private final HttpClient httpClient;
-    private final ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public VatanSmsService(ObjectMapper objectMapper) {
-        this.objectMapper = objectMapper;
+    public VatanSmsService() {
         this.httpClient = HttpClient.newBuilder()
                 .connectTimeout(Duration.ofSeconds(10))
                 .build();
