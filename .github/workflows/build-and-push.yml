@@ -97,15 +97,23 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-  # main push -> hetzner-argocd tag bump, ArgoCD deploy eder (:latest yerine sabit sha tag)
+  # main push -> hetzner-argocd tag bump, ArgoCD deploy eder (:latest yerine sabit sha tag).
+  # Bu repo public: private hetzner-argocd'in reusable workflow'unu cagiramaz, bump script'ini dogrudan calistirir.
   deploy:
     needs: [build-backend, build-frontend]
     if: github.event_name != 'pull_request'
-    uses: alperarinc/hetzner-argocd/.github/workflows/bump-image.yml@main
-    with:
-      app: market-siparis
-      images: >-
-        ghcr.io/alperarinc/market-siparis/backend:${{ needs.build-backend.outputs.tag }}
-        ghcr.io/alperarinc/market-siparis/frontend:${{ needs.build-backend.outputs.tag }}
-    secrets:
-      GITOPS_DEPLOY_KEY: ${{ secrets.GITOPS_DEPLOY_KEY }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: alperarinc/hetzner-argocd
+          ref: main
+          ssh-key: ${{ secrets.GITOPS_DEPLOY_KEY }}
+      - name: Tag guncelle + push
+        env:
+          APP: market-siparis
+          IMAGES: >-
+            ghcr.io/alperarinc/market-siparis/backend:${{ needs.build-backend.outputs.tag }}
+            ghcr.io/alperarinc/market-siparis/frontend:${{ needs.build-backend.outputs.tag }}
+          SRC: ${{ github.repository }}@${{ github.sha }}
+        run: scripts/bump.sh
